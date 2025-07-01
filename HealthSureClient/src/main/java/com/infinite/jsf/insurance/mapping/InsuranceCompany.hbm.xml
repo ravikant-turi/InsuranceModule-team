@@ -19,4 +19,5 @@
         <property name="contactPhone" column="contact_phone" type="string"/>
 
     </class>
+
 </hibernate-mapping>

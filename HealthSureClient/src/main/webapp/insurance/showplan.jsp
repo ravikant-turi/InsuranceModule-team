@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsf/html" prefix="h"%>
 <%@ taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
-
 <f:view>
 <!DOCTYPE html>
 <html>
@@ -48,17 +47,12 @@
 </style>
 </head>
 <body>
-
-
     <h1>Insurance Plan List</h1>
-
     <h:dataTable value="#{insurancePlanController.findAllPlan()}" var="plan" styleClass="insuranceTable" border="1">
-
         <h:column>
             <f:facet name="header">Plan ID</f:facet>
             <h:outputText value="#{plan.planId}" />
         </h:column>
-
         <h:column>
             <f:facet name="header">Plan Name</f:facet>
             <h:outputText value="#{plan.planName}" />
@@ -68,7 +62,6 @@
             <f:facet name="header">Type</f:facet>
             <h:outputText value="#{plan.planType}" />
         </h:column>
-
         <h:column>
             <f:facet name="header">Min Age</f:facet>
             <h:outputText value="#{plan.minEntryAge}" />
@@ -78,12 +71,10 @@
             <f:facet name="header">Max Age</f:facet>
             <h:outputText value="#{plan.maxEntryAge}" />
         </h:column>
-
         <h:column>
             <f:facet name="header">Covers</f:facet>
             <h:outputText value="#{plan.availableCoverAmounts}" />
         </h:column>
-
         <h:column>
             <f:facet name="header">Waiting</f:facet>
             <h:outputText value="#{plan.waitingPeriod}" />

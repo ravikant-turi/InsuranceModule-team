@@ -17,14 +17,16 @@ public class ConnectionTest {
 		
 		Transaction trans=session.beginTransaction();
 		
+
 		System.out.println("====================connection test is started ============= ");
 
 		
 		System.out.println("connection is : "+ session);
 		
 		System.out.println("====================connection id working fine============= ");
+
 		
-		
+		System.out.println("this is ravikant");
 		trans.commit();
 		
 		session.close();

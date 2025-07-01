@@ -21,6 +21,7 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
+
 			<name>org.hibernate.eclipse.console.hibernateBuilder</name>
 			<arguments>
 			</arguments>

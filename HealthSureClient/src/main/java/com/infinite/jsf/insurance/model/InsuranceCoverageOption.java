@@ -1,6 +1,5 @@
 package com.infinite.jsf.insurance.model;
 
-
 import lombok.Data;
 @Data
 public class InsuranceCoverageOption {
