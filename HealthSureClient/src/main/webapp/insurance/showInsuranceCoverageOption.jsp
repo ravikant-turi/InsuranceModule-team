@@ -72,27 +72,37 @@ table, th, td {
 			</h:column>
 
 			<h:column>
-				<f:facet name="header">Plan ID</f:facet>
+				<f:facet name="header">
+				<h:outputLabel value = "Plan ID"/>
+				</f:facet>
 				<h:outputText value="#{cov.insurancePlan.planId}" />
 			</h:column>
 
 			<h:column>
-				<f:facet name="header">Premium Amount</f:facet>
+				<f:facet name="header">
+				<h:outputLabel value = "Premium Amount"/>
+				</f:facet>
 				<h:outputText value="#{cov.premiumAmount}" />
 			</h:column>
 
 			<h:column>
-				<f:facet name="header">Coverage Amount</f:facet>
+				<f:facet name="header">
+				<h:outputLabel value = "Coverage Amount"/>
+				</f:facet>
 				<h:outputText value="#{cov.coverageAmount}" />
 			</h:column>
 
 			<h:column>
-				<f:facet name="header">Status</f:facet>
+				<f:facet name="header">
+				<h:outputLabel value = "Status"/>
+				</f:facet>
 				<h:outputText value="#{cov.status}" />
 			</h:column>
 
 			<h:column>
-				<f:facet name="header">Search</f:facet>
+				<f:facet name="header">
+				<h:outputLabel value = "Search"/>
+				</f:facet>
 				<h:commandButton value="Search" action="#{insuranceCoverageOptionController.searchStatus(cov)}" />
 			</h:column>
 

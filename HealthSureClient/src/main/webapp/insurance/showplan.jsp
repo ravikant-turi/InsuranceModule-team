@@ -49,64 +49,92 @@
 <body>
     <h1>Insurance Plan List</h1>
     <h:dataTable value="#{insurancePlanController.findAllPlan()}" var="plan" styleClass="insuranceTable" border="1">
+        
         <h:column>
-            <f:facet name="header">Plan ID</f:facet>
+            <f:facet name="header">
+                <h:outputLabel value="Plan ID" />
+            </f:facet>
             <h:outputText value="#{plan.planId}" />
         </h:column>
+        
         <h:column>
-            <f:facet name="header">Plan Name</f:facet>
+            <f:facet name="header">
+                <h:outputLabel value="Plan Name" />
+            </f:facet>
             <h:outputText value="#{plan.planName}" />
         </h:column>
 
         <h:column>
-            <f:facet name="header">Type</f:facet>
+            <f:facet name="header">
+                <h:outputLabel value="Type" />
+            </f:facet>
             <h:outputText value="#{plan.planType}" />
         </h:column>
+        
         <h:column>
-            <f:facet name="header">Min Age</f:facet>
+            <f:facet name="header">
+                <h:outputLabel value="Min Age" />
+            </f:facet>
             <h:outputText value="#{plan.minEntryAge}" />
         </h:column>
 
         <h:column>
-            <f:facet name="header">Max Age</f:facet>
+            <f:facet name="header">
+                <h:outputLabel value="Max Age" />
+            </f:facet>
             <h:outputText value="#{plan.maxEntryAge}" />
         </h:column>
+
         <h:column>
-            <f:facet name="header">Covers</f:facet>
+            <f:facet name="header">
+                <h:outputLabel value="Covers" />
+            </f:facet>
             <h:outputText value="#{plan.availableCoverAmounts}" />
         </h:column>
+
         <h:column>
-            <f:facet name="header">Waiting</f:facet>
+            <f:facet name="header">
+                <h:outputLabel value="Waiting Period" />
+            </f:facet>
             <h:outputText value="#{plan.waitingPeriod}" />
         </h:column>
 
         <h:column>
-            <f:facet name="header">Created</f:facet>
+            <f:facet name="header">
+                <h:outputLabel value="Created On" />
+            </f:facet>
             <h:outputText value="#{plan.createdOn}" />
         </h:column>
 
         <h:column>
-            <f:facet name="header">Expire</f:facet>
+            <f:facet name="header">
+                <h:outputLabel value="Expire Date" />
+            </f:facet>
             <h:outputText value="#{plan.expireDate}" />
         </h:column>
 
         <h:column>
-            <f:facet name="header">Active</f:facet>
+            <f:facet name="header">
+                <h:outputLabel value="Active On" />
+            </f:facet>
             <h:outputText value="#{plan.activeOn}" />
         </h:column>
 
         <h:column>
-            <f:facet name="header">Periodic</f:facet>
+            <f:facet name="header">
+                <h:outputLabel value="Periodic Diseases" />
+            </f:facet>
             <h:outputText value="#{plan.periodicDiseases}" />
         </h:column>
-         
-         <h:column>
-            <f:facet name="header">Description</f:facet>
+
+        <h:column>
+            <f:facet name="header">
+                <h:outputLabel value="Description" />
+            </f:facet>
             <h:outputText value="#{plan.description}" />
         </h:column>
 
     </h:dataTable>
-
 </body>
 </html>
 </f:view>
