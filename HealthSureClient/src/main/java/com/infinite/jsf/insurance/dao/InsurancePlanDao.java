@@ -52,4 +52,8 @@ public interface InsurancePlanDao {
      * @return a success message or status
      */
     String deleteInsurancePlan(String planId);
+    
+    List<InsurancePlan>   searchByPlanType(String planType) ;
+    
+    
 }

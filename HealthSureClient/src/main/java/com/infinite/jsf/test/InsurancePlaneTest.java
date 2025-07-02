@@ -26,7 +26,11 @@ public class InsurancePlaneTest {
 		// Create an InsuranceCompany object (you may already have this from DB or create a dummy one for now)
 		
 		
+		System.out.println("faily plan");
 		
+//		daoimpl.searchByPlanType("FAMILY").forEach(System.out::println);
+		daoimpl.searchByPlanType("SELF").forEach(System.out::println);
+
 	}
 
 }

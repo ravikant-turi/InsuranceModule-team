@@ -9,9 +9,11 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import com.infinite.jsf.insurance.dao.InsurancePlanDao;
 import com.infinite.jsf.insurance.model.InsurancePlan;
+import com.infinite.jsf.insurance.model.PlanType;
 import com.infinite.jsf.util.SessionHelper;
 
 /**
@@ -119,5 +121,24 @@ public class InsurancePlanDaoImpl implements InsurancePlanDao {
 		session.close();
 
 		return null;
+	}
+
+	@Override
+	public List<InsurancePlan> searchByPlanType(String planType) {
+		// TODO Auto-generated method stub
+		Session session=factory.openSession();
+		Transaction trans=session.beginTransaction();
+		Criteria criteria = session.createCriteria(InsurancePlan.class);
+
+        // Convert string to PlanType enum
+        PlanType planTypeEnum = PlanType.valueOf(planType.toUpperCase());
+
+        // Add restriction on planType field
+        criteria.add(Restrictions.eq("planTypeString", planType.toUpperCase()));
+        
+		List<InsurancePlan> planTypeList=criteria.list();
+		trans.commit();
+		session.close();
+		return planTypeList;
 	}
 }

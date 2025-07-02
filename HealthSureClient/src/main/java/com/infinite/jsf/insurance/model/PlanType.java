@@ -7,7 +7,7 @@ package com.infinite.jsf.insurance.model;
  * Example types: SELF, FAMILY, SENIOR, etc.
  */
 public enum PlanType {
-	SELF, FAMILY, SENIOR, CRITICAL_ILLNESS;
+	SELF, FAMILY, SENIOR, CRITICAL_ILLNESS,EPIDEMIC_PROTECT,OTHER;
 //    ELITE_HEALTH("ELITE_HEALTH");
 
 }

@@ -82,6 +82,8 @@ INSERT INTO insurance_coverage_option (coverage_id, plan_id, premium_amount, cov
 ('COV002', 'P002', 12000.00, 500000.00, 'ACTIVE'),
 ('COV003', 'P003', 20000.00, 1000000.00, 'ACTIVE');
 
+
+-- insurance_coverage_option --
 describe  insurance_coverage_option;
 
 
@@ -93,9 +95,12 @@ select * from insurance_coverage_option;
 
  describe insurance_coverage_option;
  
- 
- use healthsure;
+ DELETE FROM insurance_coverage_option WHERE coverage_id = 'cov117';
 
+ use healthsure;
+ 
+ 
+--  insurance_plan --
 ALTER TABLE insurance_plan
 ADD COLUMN active_on DATE ;
 
@@ -103,3 +108,15 @@ describe insurance_plan;
 
 select * from insurance_plan;
 select * from insurance_company;
+describe insurance_plan;
+
+DELETE FROM insurance_plan WHERE plan_id = 'p006';
+
+INSERT INTO insurance_plan (plan_id, company_id, plan_name, plan_type, min_entry_age, max_entry_age, description, available_cover_amounts, waiting_period, created_on, expire_date, periodic_diseases) VALUES
+('P007', 'COM007', 'HealthPlus Basic', 'SENIOR', 18, 65, 'Basic individual health insurance', '200000,150000,110000', '30 Days', '2025-06-01', '2099-12-31', 'NO'),
+('P008', 'COM007', 'FamilyCare Shield', 'SENIOR', 21, 70, 'Comprehensive family floater plan', '210000,1500000,1100000', '50 Days', '2025-06-01', '2099-12-31', 'YES'),
+('P009', 'COM007', 'Critical Cover Plan', 'CRITICAL_ILLNESS', 21, 65, 'Coverage for critical illnesses', '510000,1200000,1300000', '90 Days', '2025-06-01', '2099-12-31', 'YES');
+
+
+ALTER TABLE insurance_plan 
+MODIFY plan_type ENUM('SELF', 'FAMILY', 'SENIOR', 'CRITICAL_ILLNESS', 'SUPER_ELITE','EPIDEMIC_PROTECT');

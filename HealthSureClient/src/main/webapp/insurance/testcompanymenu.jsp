@@ -146,7 +146,8 @@
 
                 <h:commandLink action="superPlan" styleClass="plan-box">
                     <div>
-                        <img src="https://via.placeholder.com/250x120?text=Super+Comprehensive" class="plan-image"/>
+                                <img src="/HealthSureClient/resources/media/images/departments/cardiology.png" alt="Cardiology" class="department-icon"/>
+                    
                         <div class="plan-title">SUPER Comprehensive</div>
                         <div class="plan-desc">
                             All-in-one protection plan.<br/>
