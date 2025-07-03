@@ -24,13 +24,21 @@
         <property name="planTypeString" column="plan_type" type="string"/>
 
         <property name="minEntryAge" column="min_entry_age" type="int"/>
+        
         <property name="maxEntryAge" column="max_entry_age" type="int"/>
+        
         <property name="description" column="description" type="text"/>
+        
         <property name="availableCoverAmounts" column="available_cover_amounts" type="string"/>
+        
         <property name="waitingPeriod" column="waiting_period" type="string"/>
+        
         <property name="createdOn" column="created_on" type="date"/>
+        
         <property name="expireDate" column="expire_date" type="date"/>
+        
         <property name="activeOn" column="active_on" type="date"/>
+        
         <property name="periodicDiseases" column="periodic_diseases" type="string"/>
 
     </class>

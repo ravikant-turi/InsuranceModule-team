@@ -6,92 +6,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insurance Company Home</title>
-<style>
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background: #f0f2f5;
-    }
-    .wrapper {
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .header {
-        background: #007bff;
-        color: #fff;
-        padding: 15px 0;
-        text-align: center;
-    }
-    .container {
-        flex: 1;
-        max-width: 1000px;
-        margin: 30px auto;
-        padding: 0 20px;
-    }
-    .plans-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-    .plan-box {
-        background: #fff;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        text-align: center;
-        cursor: pointer;
-        transition: transform 0.3s, box-shadow 0.3s;
-        text-decoration: none; /* remove underline */
-    }
-    .plan-box:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    }
-    .plan-title {
-        font-size: 18px;
-        color: #007bff;
-        margin: 10px 0 5px 0;
-    }
-    .plan-desc {
-        font-size: 14px;
-        color: #555;
-        line-height: 1.4;
-        text-decoration: none;
-    }
-    .plan-image {
-        width: 100%;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 8px;
-    }
-    .footer {
-        background: #007bff;
-        color: #fff;
-        padding: 15px 20px;
-        text-align: center;
-    }
-    .footer p {
-        margin: 5px 0;
-    }
-</style>
+    <meta charset="UTF-8">
+    <title>HealthSure Insurance</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+        }
+        .wrapper {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: #004080;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+        }
+        .header img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .welcome-title {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 22px;
+            color: #004080;
+        }
+        .container {
+            flex: 1;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .plan-box {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+        }
+        .plan-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        .plan-title {
+            font-size: 18px;
+            color: #007bff;
+            margin: 10px 0 5px 0;
+        }
+        .plan-desc {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.4;
+        }
+        .plan-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .footer {
+            background: #004080;
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
 <div class="wrapper">
     <div class="header">
-        <h1>Welcome to Our Insurance Company</h1>
+        <img src="/HealthSureClient/resources/media/images/departments/cardiology.png" alt="Company Logo"/>
+        <h1>HealthSure Insurance Company</h1>
     </div>
+
+    <div class="welcome-title">Welcome to Our Insurance Company</div>
 
     <div class="container">
         <h:form>
             <div class="plans-grid">
                 <h:commandLink action="selfPlan" styleClass="plan-box">
                     <div>
-                        <img src="https://via.placeholder.com/250x120?text=Self+Plan" class="plan-image"/>
+                        <img src="/HealthSureClient/resources/media/images/departments/cardiology.png" class="plan-image"/>
                         <div class="plan-title">SELF HealthPlus Basic</div>
                         <div class="plan-desc">
                             A simple plan for individuals.<br/>
@@ -102,7 +121,7 @@
 
                 <h:commandLink action="familyPlan" styleClass="plan-box">
                     <div>
-                        <img src="https://via.placeholder.com/250x120?text=Family+Plan" class="plan-image"/>
+                        <img src="/HealthSureClient/resources/media/images/departments/cardiology.png" class="plan-image"/>
                         <div class="plan-title">FAMILYCare Shield</div>
                         <div class="plan-desc">
                             Designed for the whole family.<br/>
@@ -113,7 +132,7 @@
 
                 <h:commandLink action="seniorPlan" styleClass="plan-box">
                     <div>
-                        <img src="https://via.placeholder.com/250x120?text=Senior+Plan" class="plan-image"/>
+                        <img src="/HealthSureClient/resources/media/images/departments/cardiology.png" class="plan-image"/>
                         <div class="plan-title">SENIOR Secure</div>
                         <div class="plan-desc">
                             Tailored for senior citizens.<br/>
@@ -124,7 +143,7 @@
 
                 <h:commandLink action="criticalPlan" styleClass="plan-box">
                     <div>
-                        <img src="https://via.placeholder.com/250x120?text=Critical+Illness" class="plan-image"/>
+                        <img src="/HealthSureClient/resources/media/images/departments/cardiology.png" class="plan-image"/>
                         <div class="plan-title">CRITICAL ILLNESS</div>
                         <div class="plan-desc">
                             Support during major illnesses.<br/>
@@ -135,7 +154,7 @@
 
                 <h:commandLink action="elitePlan" styleClass="plan-box">
                     <div>
-                        <img src="https://via.placeholder.com/250x120?text=Elite+Plan" class="plan-image"/>
+                        <img src="/HealthSureClient/resources/media/images/departments/cardiology.png" class="plan-image"/>
                         <div class="plan-title">Super Health Elite</div>
                         <div class="plan-desc">
                             Premium plan for high earners.<br/>
@@ -146,8 +165,7 @@
 
                 <h:commandLink action="superPlan" styleClass="plan-box">
                     <div>
-                                <img src="/HealthSureClient/resources/media/images/departments/cardiology.png" alt="Cardiology" class="department-icon"/>
-                    
+                        <img src="/HealthSureClient/resources/media/images/departments/cardiology.png" class="plan-image"/>
                         <div class="plan-title">SUPER Comprehensive</div>
                         <div class="plan-desc">
                             All-in-one protection plan.<br/>
@@ -160,8 +178,8 @@
     </div>
 
     <div class="footer">
-        <p>&copy; 2025 Our Insurance Company. All rights reserved.</p>
-        <p>This is the best insurance company because it offers reliable, affordable, and comprehensive plans for everyone.</p>
+        <p>&copy; 2025 HealthSure Insurance Company. All rights reserved.</p>
+        <p>We offer reliable, affordable, and comprehensive plans tailored for everyone.</p>
     </div>
 </div>
 </body>
