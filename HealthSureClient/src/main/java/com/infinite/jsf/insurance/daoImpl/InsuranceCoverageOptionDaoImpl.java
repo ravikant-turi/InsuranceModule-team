@@ -25,7 +25,7 @@ public class InsuranceCoverageOptionDaoImpl implements InsuranceCoverageOptionDa
 		session = factory.openSession();
 
 		Transaction trans = session.beginTransaction();
-        session.save(coverageOption);
+		session.save(coverageOption);
 		trans.commit();
 		session.close();
 		return "success";
@@ -78,4 +78,22 @@ public class InsuranceCoverageOptionDaoImpl implements InsuranceCoverageOptionDa
 		return null;
 	}
 
+	@Override
+	public List<InsuranceCoverageOption> searchInsuranceCoverageOptionByPlanType(String planType) {
+		session = factory.openSession();
+		List<InsuranceCoverageOption> coverageOptions; 
+		Transaction trans = session.beginTransaction();
+		 String sql = "SELECT c.* FROM insurance_coverage_option c "
+                 + "JOIN insurance_plan p ON p.plan_id = c.plan_id "
+                 + "WHERE p.plan_type = :planType";
+
+      coverageOptions = session.createSQLQuery(sql)
+                               .addEntity(InsuranceCoverageOption.class)
+                               .setParameter("planType", planType.toUpperCase())  // adjust as needed
+                               .list();
+		trans.commit();
+		session.close();
+
+		return coverageOptions;
+	}
 }

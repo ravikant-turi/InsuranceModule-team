@@ -49,5 +49,10 @@ public class InsuranceCoverageOptionController {
 		System.out.println("get map : "+ coverageOption.getCoverageId());
 		return "searchcoveragedetails";
 	}
+	public List<InsuranceCoverageOption> searchInsuranceCoverageOptionByPlanType(String planType) {
+		
+		return coverageOptionDao.searchInsuranceCoverageOptionByPlanType(planType);
+		
+	}
 
 }

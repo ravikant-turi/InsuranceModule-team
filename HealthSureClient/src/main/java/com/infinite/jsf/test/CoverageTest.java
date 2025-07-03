@@ -10,6 +10,9 @@ public class CoverageTest {
 		
 		controller.findAllcoverageOption().forEach(System.out::println);
 		
+		System.out.println("====================Family=================");
+		controller.searchInsuranceCoverageOptionByPlanType("SELF").forEach(System.out::println);
+		
 		
 	}
 
