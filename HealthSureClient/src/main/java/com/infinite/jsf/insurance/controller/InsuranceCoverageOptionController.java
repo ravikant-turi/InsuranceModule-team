@@ -20,6 +20,8 @@ public class InsuranceCoverageOptionController {
 	
 	private InsurancePlan insurancePlan;
 	
+	List<InsuranceCoverageOption> coverageOptionsType;
+	
 	public List<InsuranceCoverageOption> findAllcoverageOption() {
 		return coverageOptionDao.findAllCoverageOption();
 	}
@@ -49,9 +51,13 @@ public class InsuranceCoverageOptionController {
 		System.out.println("get map : "+ coverageOption.getCoverageId());
 		return "searchcoveragedetails";
 	}
-	public List<InsuranceCoverageOption> searchInsuranceCoverageOptionByPlanType(String planType) {
+	public String searchInsuranceCoverageOptionByPlanType(String planType) {
 		
-		return coverageOptionDao.searchInsuranceCoverageOptionByPlanType(planType);
+		coverageOptionsType= coverageOptionDao.searchInsuranceCoverageOptionByPlanType(planType);
+		System.out.println("================");
+		System.out.println(coverageOptionsType);
+		return "showcoverageplanbyplantype.jsp?faces-redirect=true";
+
 		
 	}
 
