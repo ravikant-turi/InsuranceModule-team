@@ -112,4 +112,25 @@ public class InsuranceCompanyController {
 	    return isValid;
 	}
 
+	public InsuranceCompanyDao getCompanyDao() {
+		return companyDao;
+	}
+
+	public void setCompanyDao(InsuranceCompanyDao companyDao) {
+		this.companyDao = companyDao;
+	}
+
+	public InsuranceCompany getCompany() {
+		return company;
+	}
+
+	public void setCompany(InsuranceCompany company) {
+		this.company = company;
+	}
+	
+	
+//	Getter setter
+	
+	
+
 }

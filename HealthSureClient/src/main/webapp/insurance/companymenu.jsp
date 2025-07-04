@@ -115,7 +115,7 @@ html, body {
 	<div class="wrapper">
 		<div class="header">
 			<img
-				src="/HealthSureClient/resources/media/images/departments/cardiology.png"
+				src="/HealthSureClient/resources/media/images/Insurance/comapany.png"
 				alt="Company Logo" />
 			<h1>HealthSure Insurance Company</h1>
 		</div>
@@ -130,7 +130,8 @@ html, body {
 						styleClass="plan-box">
 						<div>
 							<img
-								src="/HealthSureClient/resources/media/images/departments/cardiology.png"
+								src="/HealthSureClient/resources/media/images/Insurance/professional.jpg"
+
 								class="plan-image" />
 							<div class="plan-title">SELF HealthPlus Basic</div>
 							<div class="plan-desc">
@@ -144,7 +145,7 @@ html, body {
 						styleClass="plan-box">
 						<div>
 							<img
-								src="/HealthSureClient/resources/media/images/departments/cardiology.png"
+								src="/HealthSureClient/resources/media/images/departments/fam.png"
 								class="plan-image" />
 							<div class="plan-title">FAMILYCare Shield</div>
 							<div class="plan-desc">
@@ -159,7 +160,7 @@ html, body {
 						styleClass="plan-box">
 						<div>
 							<img
-								src="/HealthSureClient/resources/media/images/departments/cardiology.png"
+								src="/HealthSureClient/resources/media/images/Insurance/seniorCitizen.jpg"
 								class="plan-image" />
 							<div class="plan-title">SENIOR Secure</div>
 							<div class="plan-desc">
@@ -173,7 +174,7 @@ html, body {
  styleClass="plan-box">
 						<div>
 							<img
-								src="/HealthSureClient/resources/media/images/departments/cardiology.png"
+								src="/HealthSureClient/resources/media/images/Insurance/criticalillness.jpg"
 								class="plan-image" />
 							<div class="plan-title">CRITICAL ILLNESS</div>
 							<div class="plan-desc">
@@ -188,7 +189,7 @@ html, body {
 						styleClass="plan-box">
 						<div>
 							<img
-								src="/HealthSureClient/resources/media/images/departments/cardiology.png"
+								src="/HealthSureClient/resources/media/images/Insurance/fit.jpg"
 								class="plan-image" />
 							<div class="plan-title">Super Health Elite</div>
 							<div class="plan-desc">
@@ -203,7 +204,7 @@ html, body {
 						styleClass="plan-box">
 						<div>
 							<img
-								src="/HealthSureClient/resources/media/images/departments/cardiology.png"
+								src="/HealthSureClient/resources/media/images/Insurance/covid2.jpg"
 								class="plan-image" />
 							<div class="plan-title">SUPER Comprehensive</div>
 							<div class="plan-desc">

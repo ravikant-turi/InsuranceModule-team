@@ -33,6 +33,30 @@ public class InsuranceCoverageOptionController {
 		return "showInsuranceCoverageOption?faces-redirect=true";
 	}
 	
+	public InsuranceCoverageOption getCoverageOption() {
+		return coverageOption;
+	}
+	public void setCoverageOption(InsuranceCoverageOption coverageOption) {
+		this.coverageOption = coverageOption;
+	}
+	public InsuranceCoverageOptionDao getCoverageOptionDao() {
+		return coverageOptionDao;
+	}
+	public void setCoverageOptionDao(InsuranceCoverageOptionDao coverageOptionDao) {
+		this.coverageOptionDao = coverageOptionDao;
+	}
+	public InsurancePlan getInsurancePlan() {
+		return insurancePlan;
+	}
+	public void setInsurancePlan(InsurancePlan insurancePlan) {
+		this.insurancePlan = insurancePlan;
+	}
+	public List<InsuranceCoverageOption> getCoverageOptionsType() {
+		return coverageOptionsType;
+	}
+	public void setCoverageOptionsType(List<InsuranceCoverageOption> coverageOptionsType) {
+		this.coverageOptionsType = coverageOptionsType;
+	}
 	public String searchStatus( InsuranceCoverageOption cov) {
 		System.out.println("===================coverage Details");
 		

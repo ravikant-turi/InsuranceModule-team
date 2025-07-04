@@ -19,7 +19,6 @@ public class ConnectionTest {
 		
 
 		System.out.println("====================connection test is started ============= ");
-
 		
 		System.out.println("connection is : "+ session);
 		

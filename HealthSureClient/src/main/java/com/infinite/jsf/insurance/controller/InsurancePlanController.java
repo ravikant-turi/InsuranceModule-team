@@ -113,6 +113,24 @@ public boolean validateInsurancePlanWithFacesMessage(InsurancePlan plan) {
 
     return isValid;
 }
+public InsurancePlan getInsurancePlan() {
+	return insurancePlan;
+}
+public void setInsurancePlan(InsurancePlan insurancePlan) {
+	this.insurancePlan = insurancePlan;
+}
+public InsuranceCompany getInsuranceCompany() {
+	return insuranceCompany;
+}
+public void setInsuranceCompany(InsuranceCompany insuranceCompany) {
+	this.insuranceCompany = insuranceCompany;
+}
+public InsurancePlanDao getPlandao() {
+	return plandao;
+}
+public void setPlandao(InsurancePlanDao plandao) {
+	this.plandao = plandao;
+}
 	
 	
 	
