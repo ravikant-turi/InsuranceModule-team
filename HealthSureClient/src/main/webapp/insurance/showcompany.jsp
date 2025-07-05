@@ -53,11 +53,60 @@ tr:hover td {
 table, th, td {
 	border: 1px solid #34495e;
 }
+
+<
+style>.success {
+	display: block;
+	background-color: #d4edda;
+	color: #155724;
+	font-weight: bold;
+	text-align: center;
+	margin: 20px auto;
+	padding: 12px 20px;
+	font-size: 16px;
+	border: 1px solid #c3e6cb;
+	border-radius: 6px;
+	width: 60%;
+	animation: fadeIn 0.8s ease-out;
+}
+
+@
+keyframes fadeIn {from { opacity:0;
+	transform: translateY(-10px);
+}
+
+to {
+	opacity: 1;
+	transform: translateY(0);
+}
+}
 </style>
+
+</style>
+
 </head>
 <body>
 
 	<h1>Insurance Company List</h1>
+
+	<!-- Success Message Div -->
+	<h:outputText value="#{insuranceCompanyController.showSuccessMessage}"
+		style="display: block; color: green; font-weight: bold; 
+                     text-align: center; margin: 20px auto; font-size: 16px;"
+		id="successBox" />
+	<!-- JavaScript to auto-hide after 2 seconds -->
+	<script>
+		window.addEventListener('load', function() {
+			var box = document.getElementById('successBox');
+			if (box && box.style.display !== 'none') {
+				setTimeout(function() {
+					box.style.display = 'none';
+				}, 2000);
+			}
+		});
+	</script>
+
+
 
 	<h:dataTable value="#{insuranceCompanyController.findAllCompany()}"
 		var="company" border="1">
@@ -103,8 +152,32 @@ table, th, td {
 			</f:facet>
 			<h:outputText value="#{company.contactPhone}" />
 		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputLabel value="Delete" />
+			</f:facet>
+			<h:form>
+				<h:commandButton value="Delete"
+					action="#{insuranceCompanyController.deleteCompanyById(company.companyId)}"
+					onclick="return confirm('Are you sure you want to delete this company?');" />
+
+			</h:form>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputLabel value="Update" />
+			</f:facet>
+			<h:form>
+				<h:commandButton value="Update"
+					action="#{insuranceCompanyController.updateCompanyById(company.companyId)}"
+					 />
+
+			</h:form>
+		</h:column>
 
 	</h:dataTable>
+	<h:messages globalOnly="true" style="color:red" />
+
 
 </body>
 	</html>

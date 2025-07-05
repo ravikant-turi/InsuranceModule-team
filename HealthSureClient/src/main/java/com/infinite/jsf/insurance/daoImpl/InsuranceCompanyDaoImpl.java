@@ -23,6 +23,10 @@ public class InsuranceCompanyDaoImpl implements InsuranceCompanyDao{
 	@Override
 	public String addCompany(InsuranceCompany company) {
 		
+		company.setCompanyId(generateNextCompanyId());
+		
+		System.out.println(company);
+		
 		session=factory.openSession();
 		
 		
@@ -91,5 +95,28 @@ public class InsuranceCompanyDaoImpl implements InsuranceCompanyDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public String generateNextCompanyId() {
+	    Session session = factory.openSession();
+
+	    String lastId = (String) session.createQuery(
+	        "SELECT c.companyId FROM InsuranceCompany c ORDER BY c.companyId DESC")
+	        .setMaxResults(1)
+	        .uniqueResult();
+
+	    session.close();
+
+	    int nextNum = 1;
+
+	    if (lastId != null && lastId.toUpperCase().startsWith("COM") && lastId.length() == 6) {
+	        String numPart = lastId.substring(3); // "001"
+	        if (numPart.matches("\\d{3}")) {
+	            nextNum = Integer.parseInt(numPart) + 1;
+	        }
+	    }
+
+	    return String.format("COM%03d", nextNum); // e.g., COM002
+	}
+
 
 }
