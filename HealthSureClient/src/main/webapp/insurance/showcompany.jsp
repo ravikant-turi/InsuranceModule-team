@@ -169,13 +169,24 @@ to {
 			</f:facet>
 			<h:form>
 				<h:commandButton value="Update"
-					action="#{insuranceCompanyController.updateCompanyById(company.companyId)}"
+					action="#{insuranceCompanyController.findCompnayById(company.companyId)}"
 					 />
 
 			</h:form>
 		</h:column>
 
 	</h:dataTable>
+	<div>
+			<f:facet name="header">
+				<h:outputLabel value="Add" />
+			</f:facet>
+			<h:form>
+				<h:commandButton value="Add"
+					action="addcompany?faces-redirect=true"
+					 />
+
+			</h:form>
+		</div>
 	<h:messages globalOnly="true" style="color:red" />
 
 

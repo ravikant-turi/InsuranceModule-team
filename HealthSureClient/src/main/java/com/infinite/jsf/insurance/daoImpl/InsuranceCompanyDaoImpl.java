@@ -90,11 +90,7 @@ public class InsuranceCompanyDaoImpl implements InsuranceCompanyDao{
 		return "deleted";
 	}
 
-	@Override
-	public String updateCompany(int companyId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	public String generateNextCompanyId() {
 	    Session session = factory.openSession();
@@ -116,6 +112,19 @@ public class InsuranceCompanyDaoImpl implements InsuranceCompanyDao{
 	    }
 
 	    return String.format("COM%03d", nextNum); // e.g., COM002
+	}
+
+	@Override
+	public String updateCompany(InsuranceCompany company) {
+		session =factory.openSession();
+		Transaction trans=session.beginTransaction();
+		
+		session.update(company);
+		
+		
+		trans.commit();
+		session.close();
+		return  "updated";
 	}
 
 

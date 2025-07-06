@@ -51,7 +51,7 @@ public interface InsurancePlanDao {
      * @param planId the ID of the insurance plan to delete
      * @return a success message or status
      */
-    String deleteInsurancePlan(String planId);
+    String deleteInsurancePlan(InsurancePlan planId);
     
     List<InsurancePlan>   searchByPlanType(String planType) ;
     
