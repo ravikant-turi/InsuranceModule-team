@@ -189,6 +189,17 @@ public class InsuranceCompanyController {
 		this.company = company;
 	}
 
+	public String getShowSuccessMessage() {
+		return showSuccessMessage;
+	}
+
+	public void setShowSuccessMessage(String showSuccessMessage) {
+		this.showSuccessMessage = showSuccessMessage;
+	}
+
 //	Getter setter
+	
+	
+	
 
 }

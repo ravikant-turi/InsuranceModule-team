@@ -25,11 +25,7 @@
 
 	<h:form id="companyForm">
 
-		<h:outputText value="Enter the Plan ID: " />
-		<h:inputText id="planId" value="#{insurancePlan.planId}" />
-		<h:message for="planId" style="color:red" />
-		<br />
-		<br />
+		
 
 		<h:outputText value="Company ID:" />
 		<h:inputText id="companyId" value="#{insuranceCompany.companyId}" />

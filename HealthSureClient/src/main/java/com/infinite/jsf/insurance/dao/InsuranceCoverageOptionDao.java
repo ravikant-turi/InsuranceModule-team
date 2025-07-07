@@ -15,6 +15,7 @@ public interface InsuranceCoverageOptionDao{
 	String updateInsuranceCoverageOption(InsuranceCoverageOption coverageOption);
 
 	InsuranceCoverageOption searchInsuranceCoverageOption(String coverageId);
+    InsuranceCoverageOption searchInsuranceCoverageOption(InsuranceCoverageOption coverageOption);
 	
 	List<InsuranceCoverageOption> searchInsuranceCoverageOptionByPlanType(String planType);
 

@@ -1,5 +1,7 @@
 package com.infinite.jsf.test;
 
+import com.infinite.jsf.util.MailSend;
+
 class Parent {
     void show() { System.out.print("Parent "); }
 }
@@ -8,7 +10,7 @@ class Child extends Parent {
 }
 public class Test {
     public static void main(String[] args) {
-        Parent p = new Child();
-        ((Parent)p).show();
+
+      MailSend.sendInfo("turiravikant@gmail.com","subject" , "this is otp");
+    } 
     }
-}

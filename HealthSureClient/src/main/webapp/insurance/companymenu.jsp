@@ -131,7 +131,6 @@ html, body {
 						<div>
 							<img
 								src="/HealthSureClient/resources/media/images/Insurance/professional.jpg"
-
 								class="plan-image" />
 							<div class="plan-title">SELF HealthPlus Basic</div>
 							<div class="plan-desc">
@@ -170,8 +169,9 @@ html, body {
 						</div>
 					</h:commandLink>
 
-					<h:commandLink 						action="#{insuranceCoverageOptionController.searchInsuranceCoverageOptionByPlanType('CRITICAL_ILLNESS')}"
- styleClass="plan-box">
+					<h:commandLink
+						action="#{insuranceCoverageOptionController.searchInsuranceCoverageOptionByPlanType('CRITICAL_ILLNESS')}"
+						styleClass="plan-box">
 						<div>
 							<img
 								src="/HealthSureClient/resources/media/images/Insurance/criticalillness.jpg"

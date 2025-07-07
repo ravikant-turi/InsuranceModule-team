@@ -43,7 +43,9 @@ public class InsuranceCoverageOptionController {
 		return null;
 	}
 
-	public String searchStatus(InsuranceCoverageOption cov) {
+	
+	
+	public String searchStatus( InsuranceCoverageOption cov) {
 		System.out.println("===================coverage Details");
 
 		System.out.println("==============");
@@ -133,6 +135,13 @@ public class InsuranceCoverageOptionController {
 		return null;
 
 	}
+	public String searchCoverageOptionById(InsuranceCoverageOption coverageOption) {
+		
+		this.coverageOption=coverageOptionDao.searchInsuranceCoverageOption(coverageOption);
+		return null;
+		
+	}
+	
 
 	public boolean validateInsuranceCoverageOptionWithFacesMessage(InsuranceCoverageOption option) {
 		FacesContext context = FacesContext.getCurrentInstance();
