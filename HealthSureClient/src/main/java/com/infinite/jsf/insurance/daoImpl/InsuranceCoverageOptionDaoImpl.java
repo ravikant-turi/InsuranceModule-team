@@ -34,7 +34,13 @@ public class InsuranceCoverageOptionDaoImpl implements InsuranceCoverageOptionDa
 	@Override
 	public String deleteInsuranceCoverageOption(InsuranceCoverageOption coverageOption) {
 		// TODO Auto-generated method stub
-		return null;
+		session=factory.openSession();
+		Transaction trans=session.beginTransaction();
+		session.delete(coverageOption);
+		
+		trans.commit();
+		session.close();
+		return "deleted";
 	}
 
 	@Override
@@ -60,22 +66,22 @@ public class InsuranceCoverageOptionDaoImpl implements InsuranceCoverageOptionDa
 		session = factory.openSession();
 
 		Transaction trans = session.beginTransaction();
-
+        session.update(coverageOption);
 		trans.commit();
 		session.close();
-		return null;
+		return "updated";
 	}
 
 	@Override
-	public String searchInsuranceCoverageOption(InsuranceCoverageOption coverageOption) {
+	public         InsuranceCoverageOption searchInsuranceCoverageOption(InsuranceCoverageOption coverageOption) {
 		// TODO Auto-generated method stub
 		session = factory.openSession();
 
 		Transaction trans = session.beginTransaction();
-
+        InsuranceCoverageOption foundCoverageOption=(InsuranceCoverageOption) session.get(InsuranceCoverageOption.class, coverageOption.getCoverageId());
 		trans.commit();
 		session.close();
-		return null;
+		return foundCoverageOption;
 	}
 
 	@Override
