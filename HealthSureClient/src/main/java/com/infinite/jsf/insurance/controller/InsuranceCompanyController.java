@@ -32,11 +32,15 @@ public class InsuranceCompanyController {
 	}
 
 	public String findCompnayById(String companyId) {
+		
+		FacesContext context=FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("companyId", companyId);
 
 		company = companyDao.findCompanyById(companyId);
+		
+		
 
-
-		return  "searchCompanyById?faces-redirect=true";
+		return "searchCompanyById?faces-redirect=true";
 
 	}
 
@@ -58,6 +62,8 @@ public class InsuranceCompanyController {
 		System.out.println("company in controller  : " + company + "with id : " + companyId);
 
 		companyDao.deleteCompanyById(company);
+		showSuccessMessage = "company deleted showsuccessfully!";
+
 
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "company deleted succussfully!", null));
 
@@ -67,14 +73,25 @@ public class InsuranceCompanyController {
 	}
 
 	public String updateCompanyById(InsuranceCompany company) {
-		if(validateCompanyWithFacesMessage(company)) {
-			companyDao.updateCompany(company);
+	FacesContext context=FacesContext.getCurrentInstance();
+	String companyId=(String) context.getExternalContext().getSessionMap().get("companyId");
+		company.setCompanyId(companyId);
+		System.out.println("==========================================================================");
+		System.out.println(company);
+
+		if (validateCompanyWithFacesMessage(company)) {
+			showSuccessMessage = "company updated  showsuccessfully!";
+
+             companyDao.updateCompany(company);
 			return "showcompany?faces-redirect=true";
 
-
 		}
-		return null;
+		else {
+			
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Validation Fails!", null));
+		}
 
+        return null;
 	}
 
 	public boolean validateCompanyWithFacesMessage(InsuranceCompany company) {
@@ -82,25 +99,21 @@ public class InsuranceCompanyController {
 		boolean isValid = true;
 
 		if (company.getName() == null || company.getName().trim().isEmpty()) {
-			context.addMessage("companyForm:name",
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Company name is required.", null));
-			isValid = false;
+		    context.addMessage("companyForm:name",
+		            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Company name is required.", null));
+		    isValid = false;
 		} else {
-			String name = company.getName().trim();
+		    String name = company.getName().trim();
 
-			if (name.length() < 4) {
-				context.addMessage("companyForm:name", new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"Company name must be at least 4 characters.", null));
-				isValid = false;
-			}
-
-			// Check if name contains any digit
-			else if (name.matches(".*\\d.*")) {
-				context.addMessage("companyForm:name",
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Company name must not contain digits.", null));
-				isValid = false;
-			}
+		    if (name.length() < 4) {
+		        context.addMessage("companyForm:name",
+		                new FacesMessage(FacesMessage.SEVERITY_ERROR,
+		                        "Company name must be at least 4 characters long.", null));
+		        isValid = false;
+		    } 
 		}
+
+
 
 		if (company.getContactEmail() == null || company.getContactEmail().trim().isEmpty()) {
 			context.addMessage("companyForm:email",
@@ -108,15 +121,11 @@ public class InsuranceCompanyController {
 			isValid = false;
 		} else {
 			String email = company.getContactEmail().trim();
-			// Check length before @
-			int atIndex = email.indexOf('@');
-			if (atIndex < 4) { // less than 4 chars before '@' or '@' missing
+
+			// Regex: 4 letters at start, then allowed characters, then @gmail.com
+			if (!email.matches("^[A-Za-z]{4}[A-Za-z0-9._%+-]*@gmail\\.com$")) {
 				context.addMessage("companyForm:email", new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"Email must have at least 4 characters before '@' symbol.", null));
-				isValid = false;
-			} else if (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
-				context.addMessage("companyForm:email", new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"Invalid email format. Example: something@gmail.com", null));
+						"Invalid email. It must start with 4 letters and end with '@gmail.com'.", null));
 				isValid = false;
 			}
 		}

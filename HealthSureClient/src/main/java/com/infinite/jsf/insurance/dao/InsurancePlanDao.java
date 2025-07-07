@@ -28,7 +28,7 @@ public interface InsurancePlanDao {
      * @param planId the ID of the insurance plan to search
      * @return the matching InsurancePlan if found, or null if not found
      */
-    InsurancePlan searchInsurancePlan(String planId);
+    InsurancePlan searchInsurancePlanById(String planId);
 
     /**
      * Retrieves all insurance plans available in the database.

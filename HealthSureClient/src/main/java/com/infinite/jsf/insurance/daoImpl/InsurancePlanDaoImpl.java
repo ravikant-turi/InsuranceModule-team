@@ -84,7 +84,7 @@ public class InsurancePlanDaoImpl implements InsurancePlanDao {
 	 * @return the InsurancePlan if found, or null if not found
 	 */
 	@Override
-	public InsurancePlan searchInsurancePlan(String planId) {
+	public InsurancePlan searchInsurancePlanById(String planId) {
         
 		session=factory.openSession();
 		Transaction trans=session.beginTransaction();

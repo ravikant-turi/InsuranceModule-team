@@ -20,6 +20,14 @@ public class InsurancePlanController {
 	private InsuranceCompany insuranceCompany;
     private String showSuccessMessage ;
 	private InsurancePlanDao plandao = new InsurancePlanDaoImpl();
+	
+	
+	
+	static {
+		
+	}
+	
+//	=============methods==============
 
 	public List<InsurancePlan> findAllPlan() {
 		return plandao.showAllPlans();
@@ -41,18 +49,58 @@ public class InsurancePlanController {
 
 	}  
 	public String searchPlanById(String planId) {
-		insurancePlan= plandao.searchInsurancePlan(planId);
-		return null;
+		
+		FacesContext context=FacesContext.getCurrentInstance();
+		
+		insurancePlan= plandao.searchInsurancePlanById(planId); 
+		context.getExternalContext().getSessionMap().put("planId", planId);
+		
+		if(insurancePlan==null) {
+			context.addMessage(null,new FacesMessage("plan is not found with this id : "+planId ,null));
+			return null;	
+		}
+		
+		return "searchPlanById?faces-redirect=true";
+		
 	}
 	
-	public String deletePlane() {
+	public String deletePlaneById(String planId) {
+		FacesContext context=FacesContext.getCurrentInstance();
+		insurancePlan= plandao.searchInsurancePlanById(planId); 
+		if(insurancePlan==null) {
+			context.addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"plan is not found with this id : "+planId ,null));
+			return null;	
+		}
 		
+		plandao.deleteInsurancePlan(insurancePlan);
 		
-		return null;
-	}
+		showSuccessMessage = "plan deleted showsuccessfully!";
 
+
+		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "company deleted succussfully!", null));
+
+		return "showplan?faces-redirect=true";
+	}
 	
 
+	
+  public String updateInsurancePlan(InsurancePlan plan) {
+	  FacesContext context=FacesContext.getCurrentInstance();
+	  String planId=(String) context.getExternalContext().getSessionMap().get("planId");
+	  plan.setPlanId(planId);
+	  if(validateInsurancePlanWithFacesMessage(plan)) {
+		  
+		  plandao.updateInsurancePlan(plan);
+		  return "showplan?faces-redirect=true";
+	  }
+	  
+	  
+	  
+	  context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"validation Fails",null));
+	  return null;
+  
+	  
+  }
 	public boolean validateInsurancePlanWithFacesMessage(InsurancePlan plan) {
 	    FacesContext context = FacesContext.getCurrentInstance();
 	    boolean isValid = true;
@@ -68,11 +116,7 @@ public class InsurancePlanController {
 	        isValid = false;
 	    }
 
-	    // Plan Type
-	    if (plan.getPlanType() == null) {
-	        context.addMessage("companyForm:planType", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Plan type is required.", null));
-	        isValid = false;
-	    }
+	    
 
 	    // Insurance Company
 	    if (plan.getInsuranceCompany() == null || plan.getInsuranceCompany().getCompanyId() == null) {

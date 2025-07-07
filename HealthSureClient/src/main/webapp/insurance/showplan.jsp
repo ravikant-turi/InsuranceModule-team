@@ -133,8 +133,44 @@
             </f:facet>
             <h:outputText value="#{plan.description}" />
         </h:column>
+        <h:column>
+			<f:facet name="header">
+				<h:outputLabel value="Delete" />
+			</f:facet>
+			<h:form>
+				<h:commandButton value="Delete"
+					action="#{insurancePlanController.deletePlaneById(plan.planId)}"
+					onclick="return confirm('Are you sure you want to delete this company?');" />
 
+			</h:form>
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputLabel value="Update" />
+			</f:facet>
+			<h:form>
+				<h:commandButton value="Update"
+					action="#{insurancePlanController.searchPlanById(plan.planId)}"
+					 />
+
+			</h:form>
+		</h:column>
     </h:dataTable>
+    <div>
+			<f:facet name="header">
+				<h:outputLabel value="Add" />
+			</f:facet>
+			<h:form>
+				<h:commandButton value="Add"
+					action="addplan?faces-redirect=true"
+					 />
+
+			</h:form>
+		</div>
+		
+		
+		  
+	<h:messages globalOnly="true" style="color:red" />
 </body>
 </html>
 </f:view>
