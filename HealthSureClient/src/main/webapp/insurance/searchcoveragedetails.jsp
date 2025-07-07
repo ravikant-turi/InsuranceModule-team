@@ -82,82 +82,99 @@ h1::after {
 
 				<div class="detail-block">
 					<span class="label">Coverage ID:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.coverageId}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.coverageId}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Plan ID:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.planId}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.planId}" />
 				</div>
+				
 
 				<div class="detail-block">
 					<span class="label">Premium Amount:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.premiumAmount}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.premiumAmount}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Coverage Amount:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.coverageAmount}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.coverageAmount}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Status:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.status}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.status}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Plan Name:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.planName}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.planName}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Available Cover Amounts:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.availableCoverAmounts}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.availableCoverAmounts}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Plan Type:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.planType}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.planType}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Max Entry Age:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.maxEntryAge}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.maxEntryAge}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Min Entry Age:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.minEntryAge}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.minEntryAge}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Periodic Diseases:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.periodicDiseases}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.periodicDiseases}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Active On:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.activeOn}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.activeOn}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Expire Date:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.expireDate}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.expireDate}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Created On:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.createdOn}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.createdOn}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Waiting Period:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.waitingPeriod}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.waitingPeriod}" />
 				</div>
 
 				<div class="detail-block">
 					<span class="label">Description:</span>
-					<h:outputText styleClass="value" value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.description}" />
+					<h:outputText styleClass="value"
+						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.description}" />
 				</div>
 
 			</div>
@@ -165,5 +182,5 @@ h1::after {
 	</div>
 
 </body>
-</html>
+	</html>
 </f:view>

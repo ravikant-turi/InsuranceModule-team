@@ -30,11 +30,37 @@ public class InsuranceCoverageOptionDaoImpl implements InsuranceCoverageOptionDa
 		session.close();
 		return "success";
 	}
+	public String generateNextCompanyId() {
+	    Session session = factory.openSession();
+
+	    String lastId = (String) session.createQuery(
+	        "SELECT c.coverageId FROM InsuranceCoverageOption c ORDER BY c.coverageId DESC")
+	        .setMaxResults(1)
+	        .uniqueResult();
+
+	    session.close();
+
+	    int nextNum = 1;
+
+	    if (lastId != null && lastId.toUpperCase().startsWith("COV") && lastId.length() == 6) {
+	        String numPart = lastId.substring(3); // "001"
+	        if (numPart.matches("\\d{3}")) {
+	            nextNum = Integer.parseInt(numPart) + 1;
+	        }
+	    }
+
+	    return String.format("COV%03d", nextNum); // e.g., COM002
+	}
 
 	@Override
 	public String deleteInsuranceCoverageOption(InsuranceCoverageOption coverageOption) {
-		// TODO Auto-generated method stub
-		return null;
+		session = factory.openSession();
+
+		Transaction trans = session.beginTransaction();
+		session.delete(coverageOption);
+		trans.commit();
+		session.close();
+		return "deleted";
 	}
 
 	@Override
@@ -60,37 +86,36 @@ public class InsuranceCoverageOptionDaoImpl implements InsuranceCoverageOptionDa
 		session = factory.openSession();
 
 		Transaction trans = session.beginTransaction();
-
+		session.update(coverageOption);
 		trans.commit();
 		session.close();
-		return null;
+		return " updated ";
 	}
 
 	@Override
-	public String searchInsuranceCoverageOption(InsuranceCoverageOption coverageOption) {
+	public InsuranceCoverageOption searchInsuranceCoverageOption(String coverageId) {
 		// TODO Auto-generated method stub
 		session = factory.openSession();
 
 		Transaction trans = session.beginTransaction();
-
+		InsuranceCoverageOption coverageOption = (InsuranceCoverageOption) session.get(InsuranceCoverageOption.class,
+				coverageId);
 		trans.commit();
 		session.close();
-		return null;
+		return coverageOption;
 	}
 
 	@Override
 	public List<InsuranceCoverageOption> searchInsuranceCoverageOptionByPlanType(String planType) {
 		session = factory.openSession();
-		List<InsuranceCoverageOption> coverageOptions; 
+		List<InsuranceCoverageOption> coverageOptions;
 		Transaction trans = session.beginTransaction();
-		 String sql = "SELECT c.* FROM insurance_coverage_option c "
-                 + "JOIN insurance_plan p ON p.plan_id = c.plan_id "
-                 + "WHERE p.plan_type = :planType";
+		String sql = "SELECT c.* FROM insurance_coverage_option c " + "JOIN insurance_plan p ON p.plan_id = c.plan_id "
+				+ "WHERE p.plan_type = :planType";
 
-      coverageOptions = session.createSQLQuery(sql)
-                               .addEntity(InsuranceCoverageOption.class)
-                               .setParameter("planType", planType.toUpperCase())  // adjust as needed
-                               .list();
+		coverageOptions = session.createSQLQuery(sql).addEntity(InsuranceCoverageOption.class)
+				.setParameter("planType", planType.toUpperCase()) // adjust as needed
+				.list();
 		trans.commit();
 		session.close();
 

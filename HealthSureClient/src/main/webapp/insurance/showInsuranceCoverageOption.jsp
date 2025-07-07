@@ -58,7 +58,22 @@ table, th, td {
 <body>
 
 	<h1>Insurance Coverage Option List</h1>
-
+<!-- Success Message Div -->
+	<h:outputText value="#{insuranceCoverageOptionController.showSuccessMessage}"
+		style="display: block; color: green; font-weight: bold; 
+                     text-align: center; margin: 20px auto; font-size: 16px;"
+		id="successBox" />
+	<!-- JavaScript to auto-hide after 2 seconds -->
+	<script>
+		window.addEventListener('load', function() {
+			var box = document.getElementById('successBox');
+			if (box && box.style.display !== 'none') {
+				setTimeout(function() {
+					box.style.display = 'none';
+				}, 2000);
+			}
+		});
+	</script>
 	<h:form>
 		<h:dataTable
 			value="#{insuranceCoverageOptionController.findAllcoverageOption()}"
@@ -66,74 +81,84 @@ table, th, td {
 
 			<h:column>
 				<f:facet name="header">
-				<h:outputLabel value= "Coverage ID" />
+					<h:outputLabel value="Coverage ID" />
 				</f:facet>
 				<h:outputText value="#{cov.coverageId}" />
 			</h:column>
 
 			<h:column>
 				<f:facet name="header">
-				<h:outputLabel value = "Plan ID"/>
+					<h:outputLabel value="Plan ID" />
 				</f:facet>
 				<h:outputText value="#{cov.insurancePlan.planId}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Plan ID" />
+				</f:facet>
+				<h:outputText value="#{cov.insurancePlan.planName}" />
 			</h:column>
 
 			<h:column>
 				<f:facet name="header">
-				<h:outputLabel value = "Premium Amount"/>
+					<h:outputLabel value="Premium Amount" />
 				</f:facet>
 				<h:outputText value="#{cov.premiumAmount}" />
 			</h:column>
 
 			<h:column>
 				<f:facet name="header">
-				<h:outputLabel value = "Coverage Amount"/>
+					<h:outputLabel value="Coverage Amount" />
 				</f:facet>
 				<h:outputText value="#{cov.coverageAmount}" />
 			</h:column>
 
 			<h:column>
 				<f:facet name="header">
-				<h:outputLabel value = "Status"/>
+					<h:outputLabel value="Status" />
 				</f:facet>
 				<h:outputText value="#{cov.status}" />
 			</h:column>
 
 			<h:column>
 				<f:facet name="header">
-				<h:outputLabel value = "DETAILS"/>
+					<h:outputLabel value="DETAILS" />
 				</f:facet>
-				<h:commandButton value="Search" action="#{insuranceCoverageOptionController.searchStatus(cov)}" />
+				<h:commandButton value="Search"
+					action="#{insuranceCoverageOptionController.searchStatus(cov)}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-				<h:outputLabel value = "DELETE"/>
+					<h:outputLabel value="DELETE" />
 				</f:facet>
-				<h:commandButton value="DELETE" action="#{insuranceCoverageOptionController.searchStatus(cov)}" />
-			</h:column><h:column>
+				<h:commandButton value="DELETE"
+					action="#{insuranceCoverageOptionController.deleteCoverageOptions(cov)}"
+					onclick="return confirm('Are you sure you want to delete this company?');" />
+				
+			</h:column>
+			<h:column>
 				<f:facet name="header">
-				<h:outputLabel value = "UPDATE"/>
+					<h:outputLabel value="UPDATE" />
 				</f:facet>
-				<h:commandButton value="UPDATE" action="#{insuranceCoverageOptionController.searchStatus(cov)}" />
+				<h:commandButton value="UPDATE"
+					action="#{insuranceCoverageOptionController.helpUpdatemethod(cov)}" />
 			</h:column>
 
 		</h:dataTable>
 	</h:form>
-<div>
-			<f:facet name="header">
-				<h:outputLabel value="Add" />
-			</f:facet>
-			<h:form>
-				<h:commandButton value="Add"
-					action="addplan?faces-redirect=true"
-					 />
+	<div>
+		<f:facet name="header">
+			<h:outputLabel value="Add" />
+		</f:facet>
+		<h:form>
+			<h:commandButton value="Add" action="addcoverageOption?faces-redirect=true" />
 
-			</h:form>
-		</div>
-		
-		
-		  
+		</h:form>
+	</div>
+
+
+
 	<h:messages globalOnly="true" style="color:red" />
 </body>
-</html>
+	</html>
 </f:view>

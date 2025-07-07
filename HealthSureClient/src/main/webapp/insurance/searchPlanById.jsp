@@ -100,7 +100,7 @@
 		<br />
 		<br />
 
-    <!-- Corrected command button -->
+        <!-- Corrected command button -->
     <h:commandButton value=" update Plan"
         action="#{insurancePlanController.updateInsurancePlan(insurancePlanController.insurancePlan)}" />
 

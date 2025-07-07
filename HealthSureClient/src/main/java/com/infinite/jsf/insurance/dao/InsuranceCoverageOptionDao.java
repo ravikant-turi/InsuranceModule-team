@@ -11,10 +11,10 @@ public interface InsuranceCoverageOptionDao{
 	String deleteInsuranceCoverageOption(InsuranceCoverageOption coverageOption);
 	
 	List<InsuranceCoverageOption> findAllCoverageOption();
-	
+
 	String updateInsuranceCoverageOption(InsuranceCoverageOption coverageOption);
 
-	String searchInsuranceCoverageOption(InsuranceCoverageOption coverageOption);
+	InsuranceCoverageOption searchInsuranceCoverageOption(String coverageId);
 	
 	List<InsuranceCoverageOption> searchInsuranceCoverageOptionByPlanType(String planType);
 

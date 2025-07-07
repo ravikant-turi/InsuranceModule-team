@@ -1,5 +1,6 @@
 package com.infinite.jsf.insurance.controller;
 
+import java.security.MessageDigest;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -14,129 +15,161 @@ import lombok.Data;
 
 @Data
 public class InsuranceCoverageOptionController {
-	
+
 	private InsuranceCoverageOption coverageOption;
-	
-	private InsuranceCoverageOptionDao coverageOptionDao=new InsuranceCoverageOptionDaoImpl();  ;
-	
+
+	private InsuranceCoverageOptionDao coverageOptionDao = new InsuranceCoverageOptionDaoImpl();;
+
 	private InsurancePlan insurancePlan;
-	
+
+	private String showSuccessMessage;
+
 	List<InsuranceCoverageOption> coverageOptionsType;
-	
+
 	public List<InsuranceCoverageOption> findAllcoverageOption() {
 		return coverageOptionDao.findAllCoverageOption();
 	}
-	public String addcoverageOption(InsuranceCoverageOptionDao coverageOption) {
-	
+
+	public String addcoverageOption(InsuranceCoverageOption coverageOption) {
+		
+		if (validateInsuranceCoverageOptionWithFacesMessage(coverageOption)) {
+            
+
 		this.coverageOption.setInsurancePlan(insurancePlan);
 		coverageOptionDao.addInsuranceCoverageOption(this.coverageOption);
+		showSuccessMessage="added successfully!";
 		return "showInsuranceCoverageOption?faces-redirect=true";
+		}
+		return null;
 	}
-	
-	public InsuranceCoverageOption getCoverageOption() {
-		return coverageOption;
-	}
-	public void setCoverageOption(InsuranceCoverageOption coverageOption) {
-		this.coverageOption = coverageOption;
-	}
-	public InsuranceCoverageOptionDao getCoverageOptionDao() {
-		return coverageOptionDao;
-	}
-	public void setCoverageOptionDao(InsuranceCoverageOptionDao coverageOptionDao) {
-		this.coverageOptionDao = coverageOptionDao;
-	}
-	public InsurancePlan getInsurancePlan() {
-		return insurancePlan;
-	}
-	public void setInsurancePlan(InsurancePlan insurancePlan) {
-		this.insurancePlan = insurancePlan;
-	}
-	public List<InsuranceCoverageOption> getCoverageOptionsType() {
-		return coverageOptionsType;
-	}
-	public void setCoverageOptionsType(List<InsuranceCoverageOption> coverageOptionsType) {
-		this.coverageOptionsType = coverageOptionsType;
-	}
-	public String searchStatus( InsuranceCoverageOption cov) {
+
+	public String searchStatus(InsuranceCoverageOption cov) {
 		System.out.println("===================coverage Details");
-		
+
 		System.out.println("==============");
 		System.out.println(cov);
-		coverageOption=cov;
+		coverageOption = cov;
 		// Put cov into session map
-	    FacesContext.getCurrentInstance()
-	                .getExternalContext()
-	                .getSessionMap()
-	                .put("selectedCoverage", cov);
-        return "searchcoveragedetails";
-	}
-	public String getCoverageDetail() {
-		
-		coverageOption= (InsuranceCoverageOption)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("selectedCoverage");
-		System.out.println("get map : "+ coverageOption.getCoverageId());
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedCoverage", cov);
 		return "searchcoveragedetails";
 	}
+
+	public String getCoverageDetail() {
+
+		coverageOption = (InsuranceCoverageOption) FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("selectedCoverage");
+		System.out.println("get map : " + coverageOption.getCoverageId());
+		return "searchcoveragedetails";
+	}
+
 	public String searchInsuranceCoverageOptionByPlanType(String planType) {
-		
-		coverageOptionsType= coverageOptionDao.searchInsuranceCoverageOptionByPlanType(planType);
+
+		coverageOptionsType = coverageOptionDao.searchInsuranceCoverageOptionByPlanType(planType);
 		System.out.println("================");
 		System.out.println(coverageOptionsType);
 		return "showcoverageplanbyplantype.jsp?faces-redirect=true";
 
-		
 	}
-	
-	
-	public String saveCoverageOption() {
-	    if (validateInsuranceCoverageOptionWithFacesMessage(coverageOption)) {
-	    }
-	    return null;
-	    }
-	
+
+	// delete method
+	public String deleteCoverageOptions(InsuranceCoverageOption coverageOption) {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		coverageOption = coverageOptionDao.searchInsuranceCoverageOption(coverageOption.getCoverageId());
+
+		if (coverageOption != null) {
+			showSuccessMessage = "deleted succssfully";
+			coverageOptionDao.deleteInsuranceCoverageOption(coverageOption);
+		}
+		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "CoverageId is not found", null));
+		return null;
+	}
+
+	// searchByid
+	public String searchCoverageOptionById(String coverageId) {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		context.getExternalContext().getSessionMap().put("coverageId", coverageId);
+
+		coverageOption = coverageOptionDao.searchInsuranceCoverageOption(coverageId);
+		if (coverageOption == null) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"coverage option is not found with this id : " + coverageId, null));
+		}
+
+		return "updateCoverageOption?faces-redirect=true";
+
+	}
+
+	public String helpUpdatemethod(InsuranceCoverageOption coverageOption) {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		context.getExternalContext().getSessionMap().put("coverageId", coverageOption.getCoverageId());
+
+		this.coverageOption = coverageOption;
+		return "updateCoverageOption?faces-redirect=true";
+
+	}
+	// update method
+
+	public String updateCoverageOption(InsuranceCoverageOption coverageOption) {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		if (coverageOption == null) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "coverage not foudn", null));
+		}
+		String coveragId = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("coverageId");
+		coverageOption.setCoverageId(coveragId);
+		if (validateInsuranceCoverageOptionWithFacesMessage(coverageOption)) {
+
+			coverageOptionDao.updateInsuranceCoverageOption(coverageOption);
+			showSuccessMessage = "update successfully!";
+
+			return "showInsuranceCoverageOption?faces-redirect=true";
+		}
+		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "validation fails!", null));
+
+		return null;
+
+	}
+
 	public boolean validateInsuranceCoverageOptionWithFacesMessage(InsuranceCoverageOption option) {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    boolean isValid = true;
+		FacesContext context = FacesContext.getCurrentInstance();
+		boolean isValid = true;
 
-	    // Validate coverageId
-	    if (option.coverageId == null || option.coverageId.trim().isEmpty()) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Coverage ID is required.", null));
-	        isValid = false;
-	    } else if (!option.coverageId.toUpperCase().matches("^COV\\d{3}$")) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-	            "Coverage ID must start with 'COV' followed by 3 digits (e.g., COV001).", null));
-	        isValid = false;
-	    }
+		
 
-	    // Validate plan
-	    if (option.insurancePlan == null || option.insurancePlan.getPlanId() == null) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Linked Insurance Plan is required.", null));
-	        isValid = false;
-	    }
+		// Validate plan
+		if (option.insurancePlan == null || option.insurancePlan.getPlanId() == null) {
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Linked Insurance Plan is required.", null));
+			isValid = false;
+		}
 
-	    // Validate premiumAmount
-	    if (option.premiumAmount < 500 || option.premiumAmount > 100000) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-	            "Premium amount must be between ₹500 and ₹100,000.", null));
-	        isValid = false;
-	    }
+		// Validate premiumAmount
+		if (option.premiumAmount < 500 || option.premiumAmount > 100000) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Premium amount must be between ₹500 and ₹100,000.", null));
+			isValid = false;
+		}
 
-	    // Validate coverageAmount
-	    if (option.coverageAmount < 100000 || option.coverageAmount > 50000000) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-	            "Coverage amount must be between ₹1,00,000 (1L) and ₹5,00,00,000 (5Cr).", null));
-	        isValid = false;
-	    }
+		// Validate coverageAmount
+		if (option.coverageAmount < 100000 || option.coverageAmount > 50000000) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Coverage amount must be between ₹1,00,000 (1L) and ₹5,00,00,000 (5Cr).", null));
+			isValid = false;
+		}
 
-	    // Validate status
-	    if (option.status == null || option.status.trim().isEmpty()) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Status is required.", null));
-	        isValid = false;
-	    }
+		// Validate status
+		if (option.status == null || option.status.trim().isEmpty()) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Status is required.", null));
+			isValid = false;
+		}
 
-	    return isValid;
+		return isValid;
 	}
-	
-//	<h:messages globalOnly="true" style="color:red" />
 
+//	<h:messages globalOnly="true" style="color:red" />
 
 }
