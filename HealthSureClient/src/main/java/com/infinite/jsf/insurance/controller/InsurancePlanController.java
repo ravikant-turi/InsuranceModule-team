@@ -51,8 +51,10 @@ public class InsurancePlanController {
 	public String searchPlanById(String planId) {
 		
 		FacesContext context=FacesContext.getCurrentInstance();
-		
 		insurancePlan= plandao.searchInsurancePlanById(planId); 
+		System.out.println("=====search method is called==========");
+		System.out.println(insurancePlan);
+		
 		context.getExternalContext().getSessionMap().put("planId", planId);
 		
 		if(insurancePlan==null) {
@@ -86,8 +88,11 @@ public class InsurancePlanController {
 	
   public String updateInsurancePlan(InsurancePlan plan) {
 	  FacesContext context=FacesContext.getCurrentInstance();
-	  String planId=(String) context.getExternalContext().getSessionMap().get("planId");
-	  plan.setPlanId(planId);
+//	  String planId=(String) context.getExternalContext().getSessionMap().get("planId");
+//	  plan.setPlanId(planId);
+	  System.out.println("=====update method is called==========");
+		System.out.println(plan);
+		
 	  if(validateInsurancePlanWithFacesMessage(plan)) {
 		  
 		  plandao.updateInsurancePlan(plan);

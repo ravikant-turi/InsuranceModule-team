@@ -119,6 +119,14 @@
             </f:facet>
             <h:outputText value="#{plan.activeOn}" />
         </h:column>
+<h:outputText value="Select Plan Type: " />
+<h:selectOneMenu id="planType" value="#{plan.planType}">
+    <f:selectItem itemLabel="--Select--" itemValue="" />
+    <f:selectItem itemLabel="SELF" itemValue="SELF" />
+    <f:selectItem itemLabel="FAMILY" itemValue="FAMILY" />
+    <f:selectItem itemLabel="SENIOR" itemValue="SENIOR" />
+</h:selectOneMenu>
+<h:message for="planType" style="color:red" />
 
         <h:column>
             <f:facet name="header">
@@ -154,6 +162,7 @@
 					 />
 
 			</h:form>
+			
 		</h:column>
     </h:dataTable>
     <div>

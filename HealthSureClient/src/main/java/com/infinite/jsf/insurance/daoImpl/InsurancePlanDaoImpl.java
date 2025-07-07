@@ -45,7 +45,11 @@ public class InsurancePlanDaoImpl implements InsurancePlanDao {
 	@Override
 	public String addInsurancePlan(InsurancePlan plan) {
 		// TODO: Implement logic to save InsurancePlan to database
-		plan.setPlanId(generateNextPlanId());
+		String planId=generateNextPlanId();
+		System.out.println("============testing add==========");
+		System.out.println("planId : " + planId);
+		System.out.println(plan);
+		plan.setPlanId(planId);
 		Session	session = factory.openSession();
 		Transaction trans = session.beginTransaction();
 		session.save(plan);
@@ -66,7 +70,7 @@ public class InsurancePlanDaoImpl implements InsurancePlanDao {
 
 	    int nextNum = 1;
 
-	    if (lastId != null && lastId.toUpperCase().startsWith("PLN") && lastId.length() == 6) {
+	    if (lastId != null && lastId.toUpperCase().startsWith("PLA") && lastId.length() == 6) {
 	        String numPart = lastId.substring(3); // e.g., "001"
 	        if (numPart.matches("\\d{3}")) {
 	            nextNum = Integer.parseInt(numPart) + 1;
@@ -75,6 +79,7 @@ public class InsurancePlanDaoImpl implements InsurancePlanDao {
 
 	    return String.format("PLA%03d", nextNum); // e.g., PLA002
 	}
+
 
 
 	/**

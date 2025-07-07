@@ -101,14 +101,39 @@ table, th, td {
 
 			<h:column>
 				<f:facet name="header">
-				<h:outputLabel value = "Search"/>
+				<h:outputLabel value = "DETAILS"/>
 				</f:facet>
 				<h:commandButton value="Search" action="#{insuranceCoverageOptionController.searchStatus(cov)}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+				<h:outputLabel value = "DELETE"/>
+				</f:facet>
+				<h:commandButton value="DELETE" action="#{insuranceCoverageOptionController.searchStatus(cov)}" />
+			</h:column><h:column>
+				<f:facet name="header">
+				<h:outputLabel value = "UPDATE"/>
+				</f:facet>
+				<h:commandButton value="UPDATE" action="#{insuranceCoverageOptionController.searchStatus(cov)}" />
 			</h:column>
 
 		</h:dataTable>
 	</h:form>
+<div>
+			<f:facet name="header">
+				<h:outputLabel value="Add" />
+			</f:facet>
+			<h:form>
+				<h:commandButton value="Add"
+					action="addplan?faces-redirect=true"
+					 />
 
+			</h:form>
+		</div>
+		
+		
+		  
+	<h:messages globalOnly="true" style="color:red" />
 </body>
 </html>
 </f:view>
