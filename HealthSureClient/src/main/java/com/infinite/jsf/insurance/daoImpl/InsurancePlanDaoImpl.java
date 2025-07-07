@@ -45,6 +45,7 @@ public class InsurancePlanDaoImpl implements InsurancePlanDao {
 	@Override
 	public String addInsurancePlan(InsurancePlan plan) {
 		// TODO: Implement logic to save InsurancePlan to database
+		plan.setPlanId(generateNextPlanId());
 		Session	session = factory.openSession();
 		Transaction trans = session.beginTransaction();
 		session.save(plan);
@@ -52,6 +53,29 @@ public class InsurancePlanDaoImpl implements InsurancePlanDao {
 		session.close();
 		return "success";
 	}
+	
+	public String generateNextPlanId() {
+	    Session session = factory.openSession();
+
+	    String lastId = (String) session.createQuery(
+	        "SELECT p.planId FROM InsurancePlan p ORDER BY p.planId DESC")
+	        .setMaxResults(1)
+	        .uniqueResult();
+
+	    session.close();
+
+	    int nextNum = 1;
+
+	    if (lastId != null && lastId.toUpperCase().startsWith("PLN") && lastId.length() == 6) {
+	        String numPart = lastId.substring(3); // e.g., "001"
+	        if (numPart.matches("\\d{3}")) {
+	            nextNum = Integer.parseInt(numPart) + 1;
+	        }
+	    }
+
+	    return String.format("PLA%03d", nextNum); // e.g., PLA002
+	}
+
 
 	/**
 	 * Searches for an insurance plan by its plan ID.
@@ -61,8 +85,13 @@ public class InsurancePlanDaoImpl implements InsurancePlanDao {
 	 */
 	@Override
 	public InsurancePlan searchInsurancePlan(String planId) {
-		// TODO: Implement logic to retrieve InsurancePlan from database by ID
-		return null;
+        
+		session=factory.openSession();
+		Transaction trans=session.beginTransaction();
+        InsurancePlan plan=(InsurancePlan) session.get(InsurancePlan.class, planId);
+        trans.commit();
+        session.close();
+		return plan;
 	}
 
 	/**
@@ -98,10 +127,10 @@ public class InsurancePlanDaoImpl implements InsurancePlanDao {
 		// TODO: Implement logic to update InsurancePlan in database
 		Session session = factory.openSession();
 		Transaction trans = session.beginTransaction();
-
+         session.update(plan);
 		trans.commit();
 		session.close();
-		return null;
+		return "updated";
 	}
 
 	/**
@@ -111,16 +140,16 @@ public class InsurancePlanDaoImpl implements InsurancePlanDao {
 	 * @return success message or status
 	 */
 	@Override
-	public String deleteInsurancePlan(String planId) {
+	public String deleteInsurancePlan(InsurancePlan plan) {
 		// TODO: Implement logic to delete InsurancePlan from database
 
 		Session session = factory.openSession();
 		Transaction trans = session.beginTransaction();
-
+        session.delete(plan);
 		trans.commit();
 		session.close();
 
-		return null;
+		return "deleted";
 	}
 
 	@Override

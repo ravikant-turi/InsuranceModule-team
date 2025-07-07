@@ -24,7 +24,7 @@ public interface InsuranceCompanyDao {
     
     //update company by id
     
-    String updateCompany(int companyId);
+    String updateCompany(InsuranceCompany company);
     
     
     
