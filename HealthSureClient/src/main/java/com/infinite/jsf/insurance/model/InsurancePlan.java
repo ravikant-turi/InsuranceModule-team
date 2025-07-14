@@ -1,4 +1,4 @@
-package com.infinite.jsf.insurance.model;
+ package com.infinite.jsf.insurance.model;
 import java.util.Date;
 
 import lombok.Data;

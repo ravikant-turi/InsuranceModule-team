@@ -23,14 +23,14 @@ public class InsuranceCoverageOptionDaoImpl implements InsuranceCoverageOptionDa
 	public String addInsuranceCoverageOption(InsuranceCoverageOption coverageOption) {
 		// TODO Auto-generated method stub
 		session = factory.openSession();
-
+        coverageOption.setCoverageId(generateNextInsuranceCoverageOptionId());
 		Transaction trans = session.beginTransaction();
 		session.save(coverageOption);
 		trans.commit();
 		session.close();
 		return "success";
 	}
-	public String generateNextCompanyId() {
+	public String generateNextInsuranceCoverageOptionId() {
 	    Session session = factory.openSession();
 
 	    String lastId = (String) session.createQuery(

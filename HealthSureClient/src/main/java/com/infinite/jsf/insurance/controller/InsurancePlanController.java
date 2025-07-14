@@ -22,11 +22,6 @@ public class InsurancePlanController {
 	private InsurancePlanDao plandao = new InsurancePlanDaoImpl();
 	
 	
-	
-	static {
-		
-	}
-	
 //	=============methods==============
 
 	public List<InsurancePlan> findAllPlan() {
@@ -106,7 +101,15 @@ public class InsurancePlanController {
   
 	  
   }
-	public boolean validateInsurancePlanWithFacesMessage(InsurancePlan plan) {
+  
+  // show plan details 
+  
+  public String showPlanById(InsurancePlan plan) {
+	  insurancePlan=plan;
+	  return "showplanDetails?faces-redirect=true";
+}
+
+public boolean validateInsurancePlanWithFacesMessage(InsurancePlan plan) {
 	    FacesContext context = FacesContext.getCurrentInstance();
 	    boolean isValid = true;
 

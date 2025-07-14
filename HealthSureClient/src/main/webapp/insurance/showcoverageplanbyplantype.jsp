@@ -14,6 +14,11 @@ body {
 	font-family: Arial, sans-serif;
 	background-color: #f2f2f2;
 }
+.button-center {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
 
 h1 {
 	text-align: center;
@@ -103,10 +108,14 @@ table, th, td {
 				<f:facet name="header">
 				<h:outputLabel value = "Details"/>
 				</f:facet>
-				<h:commandButton value="Details" action="#{insuranceCoverageOptionController.searchStatus(cov)}" />
+				<h:commandButton value="Details" action="#{insuranceCoverageOptionController.showFullPlan(cov)}" />
 			</h:column>
 
 		</h:dataTable>
+		 <div class="button-center">
+		
+		                <h:commandButton value="Back" action="companymenu.jsp" styleClass="simple-btn" />
+		</div>
 	</h:form>
 
 </body>

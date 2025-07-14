@@ -21,6 +21,11 @@ body {
 	align-items: flex-start;
 	min-height: 100vh;
 }
+.button-center {
+            text-align: center;
+            margin-top: 40px;
+        }
+         
 
 h1 {
 	color: #007acc;
@@ -177,6 +182,9 @@ h1::after {
 						value="#{insuranceCoverageOptionController.coverageOption.insurancePlan.description}" />
 				</div>
 
+			</div>
+			 <div class="button-center">
+			                <h:commandButton value="Back" action="showcoverageplanbyplantype.jsp" styleClass="simple-btn" />
 			</div>
 		</h:form>
 	</div>

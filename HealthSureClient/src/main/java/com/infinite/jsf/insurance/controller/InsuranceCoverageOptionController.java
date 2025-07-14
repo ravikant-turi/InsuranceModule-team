@@ -1,5 +1,6 @@
 package com.infinite.jsf.insurance.controller;
 
+import java.awt.image.renderable.ContextualRenderedImageFactory;
 import java.security.MessageDigest;
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class InsuranceCoverageOptionController {
 	private InsurancePlan insurancePlan;
 
 	private String showSuccessMessage;
+	
+	private String planId;
 
 	List<InsuranceCoverageOption> coverageOptionsType;
 
@@ -31,21 +34,42 @@ public class InsuranceCoverageOptionController {
 	}
 
 	public String addcoverageOption(InsuranceCoverageOption coverageOption) {
-		
-		if (validateInsuranceCoverageOptionWithFacesMessage(coverageOption)) {
-            
 
-		this.coverageOption.setInsurancePlan(insurancePlan);
-		coverageOptionDao.addInsuranceCoverageOption(this.coverageOption);
-		showSuccessMessage="added successfully!";
-		return "showInsuranceCoverageOption?faces-redirect=true";
+		if (validateInsuranceCoverageOptionWithFacesMessage(coverageOption)) {
+
+			this.coverageOption.setInsurancePlan(insurancePlan);
+			coverageOptionDao.addInsuranceCoverageOption(this.coverageOption);
+			showSuccessMessage = "added successfully!";
+			return "showInsuranceCoverageOption?faces-redirect=true";
+		}
+		return null;
+	}
+	
+	// This is method is called from showPlan
+	public String addcoverageOptionToPlan(InsurancePlan plan) {
+		 insurancePlan=plan;
+		 FacesContext context=FacesContext.getCurrentInstance();
+		 context.getExternalContext().getSessionMap().put("insurancePlan", plan);
+		 return "addCoverageOptionToPlan?faces-redirect=true";
+
+	}
+	//Add the coverageOption and return to the showPlan 
+	public String addcoverageOptionToPlanHelper() {
+		 FacesContext context=FacesContext.getCurrentInstance();
+
+		insurancePlan=(InsurancePlan) context.getExternalContext().getSessionMap().get("insurancePlan");
+          coverageOption.setInsurancePlan(insurancePlan);
+		if (validateInsuranceCoverageOptionWithFacesMessage(coverageOption)) {
+
+			this.coverageOption.setInsurancePlan(insurancePlan);
+			coverageOptionDao.addInsuranceCoverageOption(this.coverageOption);
+			showSuccessMessage = "added successfully!";
+			return "showplan?faces-redirect=true";
 		}
 		return null;
 	}
 
-	
-	
-	public String searchStatus( InsuranceCoverageOption cov) {
+	public String showFullPlan(InsuranceCoverageOption cov) {
 		System.out.println("===================coverage Details");
 
 		System.out.println("==============");
@@ -135,19 +159,17 @@ public class InsuranceCoverageOptionController {
 		return null;
 
 	}
+
 	public String searchCoverageOptionById(InsuranceCoverageOption coverageOption) {
-		
-		this.coverageOption=coverageOptionDao.searchInsuranceCoverageOption(coverageOption);
+
+		this.coverageOption = coverageOptionDao.searchInsuranceCoverageOption(coverageOption);
 		return null;
-		
+
 	}
-	
 
 	public boolean validateInsuranceCoverageOptionWithFacesMessage(InsuranceCoverageOption option) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		boolean isValid = true;
-
-		
 
 		// Validate plan
 		if (option.insurancePlan == null || option.insurancePlan.getPlanId() == null) {
