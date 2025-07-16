@@ -24,6 +24,7 @@ public class InsurancePlanController {
 	private InsuranceCoverageOption coverageOption3;
 	private InsuranceCoverageOptionDao insuranceCoverageOptionDao;
 	private InsurancePlanDao plandao = new InsurancePlanDaoImpl();
+	private List<InsuranceCoverageOption>planwithCovrageDetailsList;
 
 //	=============methods==============
 
@@ -50,45 +51,35 @@ public class InsurancePlanController {
 	// addInsurancePlanWithCoveragePlan directly
 
 	public String addInsurancePlanWithCoveragePlan() {
-		FacesContext context = FacesContext.getCurrentInstance();
-
+	    FacesContext context = FacesContext.getCurrentInstance();
 		insurancePlan.setInsuranceCompany(insuranceCompany);
 
-		if (insurancePlan == null) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, " is null", null));
-			return null;
-		}
-		if (coverageOption1 == null && coverageOption2 == null && coverageOption3 == null) {
-			context.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "add Coverage amount properly is null", null));
-			return null;
-		}
-		if (insurancePlan != null && validateInsurancePlanWithFacesMessage(insurancePlan)) {
+	    if (insurancePlan == null) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Plan is not found with this id 1", null));
+	        return null;
+	    }
 
-			plandao.addInsurancePlan(insurancePlan);
-			
-			if (coverageOption1 != null || coverageOption2 != null || coverageOption3 != null) {
-				System.out.println("===========================================================");
-                  System.out.println("planId : "+ insurancePlan.getPlanId());
-				if (coverageOption1 != null && validateInsuranceCoverageOptionWithFacesMessage(coverageOption1)) {
-					coverageOption1.setInsurancePlan(insurancePlan);
-					insuranceCoverageOptionDao.addInsuranceCoverageOption(coverageOption1);
-				}
-				if (coverageOption2 != null && validateInsuranceCoverageOptionWithFacesMessage(coverageOption2)) {
-					coverageOption2.setInsurancePlan(insurancePlan);
-					insuranceCoverageOptionDao.addInsuranceCoverageOption(coverageOption2);
-				}
-				if (coverageOption3 != null && validateInsuranceCoverageOptionWithFacesMessage(coverageOption3)) {
-					coverageOption3.setInsurancePlan(insurancePlan);
-					insuranceCoverageOptionDao.addInsuranceCoverageOption(coverageOption3);
-				}
 
-			}
+	    if (coverageOption1 == null && coverageOption2 == null && coverageOption3 == null) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "No coverage options provided", null));
+	        return null;
+	    }
 
-		}
+	    if (validateInsurancePlanWithFacesMessage(insurancePlan)) {
+	        plandao.addInsurancePlan(insurancePlan);
 
-		return "showplan?faces-redirect=true";
+	        InsuranceCoverageOption[] options = {coverageOption1, coverageOption2, coverageOption3};
+	        for (InsuranceCoverageOption option : options) {
+	            if (option != null && validateInsuranceCoverageOptionWithFacesMessage(option)) {
+	                option.setInsurancePlan(insurancePlan);
+	                insuranceCoverageOptionDao.addInsuranceCoverageOption(option);
+	            }
+	        }
+	    }
+
+	    return "showplan?faces-redirect=true";
 	}
+
 
 //search Plan By planId
 	public String searchPlanById(String planId) {
@@ -152,6 +143,11 @@ public class InsurancePlanController {
 	public String showPlanById(InsurancePlan plan) {
 		insurancePlan = plan;
 		return "showplanDetails?faces-redirect=true";
+	}
+	//show all planDetailsandcoverageDetailsbyplanId
+	public String showPlanWithCoveragDetailsByplanId(String plaId) {
+		planwithCovrageDetailsList=insuranceCoverageOptionDao.searchInsuranceCoverageOptionByPlanId(plaId);
+		return "showAllPlanByIdTest??faces-redirect=true";
 	}
 
 	// validation of plan
@@ -360,6 +356,14 @@ public class InsurancePlanController {
 
 	public void setInsuranceCoverageOptionDao(InsuranceCoverageOptionDao insuranceCoverageOptionDao) {
 		this.insuranceCoverageOptionDao = insuranceCoverageOptionDao;
+	}
+
+	public List<InsuranceCoverageOption> getPlanwithCovrageDetailsList() {
+		return planwithCovrageDetailsList;
+	}
+
+	public void setPlanwithCovrageDetailsList(List<InsuranceCoverageOption> planwithCovrageDetailsList) {
+		this.planwithCovrageDetailsList = planwithCovrageDetailsList;
 	}
 
 }

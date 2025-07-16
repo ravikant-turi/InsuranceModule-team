@@ -17,7 +17,7 @@ public class CoverageTest {
 		System.out.println("====================Family=================");
 //		controller.searchInsuranceCoverageOptionByPlanType("SELF").forEach(System.out::println);
 		
-		dao.searchInsuranceCoverageOptionByPlanId("P001").forEach(System.out::println);
+		dao.searchInsuranceCoverageOptionByPlanId("PLA006").forEach(System.out::println);
 		
 		
 	}

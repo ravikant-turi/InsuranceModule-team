@@ -284,7 +284,7 @@ form {
 		
 
 	</div>
-		//<h:messages globalOnly="true" style="color:red" />
+		<h:messages globalOnly="true" style="color:red" />
 </body>
 
 	</html>
