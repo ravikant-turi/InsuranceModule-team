@@ -6,9 +6,11 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import com.infinite.jsf.insurance.dao.InsuranceCoverageOptionDao;
 import com.infinite.jsf.insurance.dao.InsurancePlanDao;
 import com.infinite.jsf.insurance.daoImpl.InsurancePlanDaoImpl;
 import com.infinite.jsf.insurance.model.InsuranceCompany;
+import com.infinite.jsf.insurance.model.InsuranceCoverageOption;
 import com.infinite.jsf.insurance.model.InsurancePlan;
 
 //this controller contains all the method related to InsurancePlan
@@ -17,6 +19,10 @@ public class InsurancePlanController {
 	private InsurancePlan insurancePlan;
 	private InsuranceCompany insuranceCompany;
 	private String showSuccessMessage;
+	private InsuranceCoverageOption coverageOption1;
+	private InsuranceCoverageOption coverageOption2;
+	private InsuranceCoverageOption coverageOption3;
+	private InsuranceCoverageOptionDao insuranceCoverageOptionDao;
 	private InsurancePlanDao plandao = new InsurancePlanDaoImpl();
 
 //	=============methods==============
@@ -40,6 +46,50 @@ public class InsurancePlanController {
 		return null;
 
 	}
+
+	// addInsurancePlanWithCoveragePlan directly
+
+	public String addInsurancePlanWithCoveragePlan() {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		insurancePlan.setInsuranceCompany(insuranceCompany);
+
+		if (insurancePlan == null) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, " is null", null));
+			return null;
+		}
+		if (coverageOption1 == null && coverageOption2 == null && coverageOption3 == null) {
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "add Coverage amount properly is null", null));
+			return null;
+		}
+		if (insurancePlan != null && validateInsurancePlanWithFacesMessage(insurancePlan)) {
+
+			plandao.addInsurancePlan(insurancePlan);
+			
+			if (coverageOption1 != null || coverageOption2 != null || coverageOption3 != null) {
+				System.out.println("===========================================================");
+                  System.out.println("planId : "+ insurancePlan.getPlanId());
+				if (coverageOption1 != null && validateInsuranceCoverageOptionWithFacesMessage(coverageOption1)) {
+					coverageOption1.setInsurancePlan(insurancePlan);
+					insuranceCoverageOptionDao.addInsuranceCoverageOption(coverageOption1);
+				}
+				if (coverageOption2 != null && validateInsuranceCoverageOptionWithFacesMessage(coverageOption2)) {
+					coverageOption2.setInsurancePlan(insurancePlan);
+					insuranceCoverageOptionDao.addInsuranceCoverageOption(coverageOption2);
+				}
+				if (coverageOption3 != null && validateInsuranceCoverageOptionWithFacesMessage(coverageOption3)) {
+					coverageOption3.setInsurancePlan(insurancePlan);
+					insuranceCoverageOptionDao.addInsuranceCoverageOption(coverageOption3);
+				}
+
+			}
+
+		}
+
+		return "showplan?faces-redirect=true";
+	}
+
 //search Plan By planId
 	public String searchPlanById(String planId) {
 
@@ -58,6 +108,7 @@ public class InsurancePlanController {
 		return "searchPlanById?faces-redirect=true";
 
 	}
+
 //delete operation By planId
 	public String deletePlaneById(String planId) {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -76,6 +127,7 @@ public class InsurancePlanController {
 
 		return "showplan?faces-redirect=true";
 	}
+
 //update plan 
 	public String updateInsurancePlan(InsurancePlan plan) {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -101,7 +153,8 @@ public class InsurancePlanController {
 		insurancePlan = plan;
 		return "showplanDetails?faces-redirect=true";
 	}
- // validation of plan
+
+	// validation of plan
 	public boolean validateInsurancePlanWithFacesMessage(InsurancePlan plan) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		boolean isValid = true;
@@ -208,6 +261,42 @@ public class InsurancePlanController {
 
 		return isValid;
 	}
+
+	// validation CaverageOptions
+	public boolean validateInsuranceCoverageOptionWithFacesMessage(InsuranceCoverageOption option) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		boolean isValid = true;
+
+		// Validate plan
+		if (option.insurancePlan == null || option.insurancePlan.getPlanId() == null) {
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Linked Insurance Plan is required.", null));
+			isValid = false;
+		}
+
+		// Validate premiumAmount
+		if (option.premiumAmount < 500 || option.premiumAmount > 100000) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Premium amount must be between ₹500 and ₹100,000.", null));
+			isValid = false;
+		}
+
+		// Validate coverageAmount
+		if (option.coverageAmount < 100000 || option.coverageAmount > 50000000) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Coverage amount must be between ₹1,00,000 (1L) and ₹5,00,00,000 (5Cr).", null));
+			isValid = false;
+		}
+
+		// Validate status
+		if (option.status == null || option.status.trim().isEmpty()) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Status is required.", null));
+			isValid = false;
+		}
+
+		return isValid;
+	}
+
 //Getter and Setters
 	public InsurancePlan getInsurancePlan() {
 		return insurancePlan;
@@ -239,6 +328,38 @@ public class InsurancePlanController {
 
 	public void setPlandao(InsurancePlanDao plandao) {
 		this.plandao = plandao;
+	}
+
+	public InsuranceCoverageOption getCoverageOption1() {
+		return coverageOption1;
+	}
+
+	public void setCoverageOption1(InsuranceCoverageOption coverageOption1) {
+		this.coverageOption1 = coverageOption1;
+	}
+
+	public InsuranceCoverageOption getCoverageOption2() {
+		return coverageOption2;
+	}
+
+	public void setCoverageOption2(InsuranceCoverageOption coverageOption2) {
+		this.coverageOption2 = coverageOption2;
+	}
+
+	public InsuranceCoverageOption getCoverageOption3() {
+		return coverageOption3;
+	}
+
+	public void setCoverageOption3(InsuranceCoverageOption coverageOption3) {
+		this.coverageOption3 = coverageOption3;
+	}
+
+	public InsuranceCoverageOptionDao getInsuranceCoverageOptionDao() {
+		return insuranceCoverageOptionDao;
+	}
+
+	public void setInsuranceCoverageOptionDao(InsuranceCoverageOptionDao insuranceCoverageOptionDao) {
+		this.insuranceCoverageOptionDao = insuranceCoverageOptionDao;
 	}
 
 }

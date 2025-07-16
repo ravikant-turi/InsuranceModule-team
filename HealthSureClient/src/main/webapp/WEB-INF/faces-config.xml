@@ -49,6 +49,27 @@
 
 	<!-- ✅ Model Bean -->
 	<managed-bean>
+		<managed-bean-name>coverageOption1</managed-bean-name>
+		<managed-bean-class>com.infinite.jsf.insurance.model.InsuranceCoverageOption
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<!-- ✅ Model Bean -->
+	<managed-bean>
+		<managed-bean-name>coverageOption2</managed-bean-name>
+		<managed-bean-class>com.infinite.jsf.insurance.model.InsuranceCoverageOption
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<!-- ✅ Model Bean -->
+	<managed-bean>
+		<managed-bean-name>coverageOption3</managed-bean-name>
+		<managed-bean-class>com.infinite.jsf.insurance.model.InsuranceCoverageOption
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<!-- ✅ Model Bean -->
+	<managed-bean>
 		<managed-bean-name>insurancePlan</managed-bean-name>
 		<managed-bean-class>com.infinite.jsf.insurance.model.InsurancePlan
 		</managed-bean-class>
@@ -59,6 +80,13 @@
 	<managed-bean>
 		<managed-bean-name>insurancePlanDao</managed-bean-name>
 		<managed-bean-class>com.infinite.jsf.insurance.daoImpl.InsurancePlanDaoImpl
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<!-- InsuranceCoverageOption DAO bean -->
+	<managed-bean>
+		<managed-bean-name>insuranceCoverageOptionDao</managed-bean-name>
+		<managed-bean-class>com.infinite.jsf.insurance.daoImpl.InsuranceCoverageOptionDaoImpl
 		</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
@@ -83,6 +111,22 @@
 			<property-name>insuranceCompany</property-name>
 			<value>#{insuranceCompany}</value>
 		</managed-property>
+		<managed-property>
+			<property-name>coverageOption1</property-name>
+			<value>#{coverageOption1}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>coverageOption2</property-name>
+			<value>#{coverageOption2}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>coverageOption3</property-name>
+			<value>#{coverageOption3}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>insuranceCoverageOptionDao</property-name>
+			<value>#{insuranceCoverageOptionDao}</value>
+		</managed-property>
 	</managed-bean>
 
 
@@ -96,18 +140,14 @@
 	</managed-bean>
 
 
-	<!-- InsuranceCoverageOption DAO bean -->
-	<managed-bean>
-		<managed-bean-name>insuranceCoverageOptionDao</managed-bean-name>
-		<managed-bean-class>com.infinite.jsf.insurance.daoImpl.InsuranceCoverageOptionDaoImpl
-		</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
-	</managed-bean>
+	
 
 	<!-- Controller bean for managing coverage options in JSF pages -->
 	<managed-bean>
-		<managed-bean-name>insuranceCoverageOptionController</managed-bean-name>
-		<managed-bean-class>com.infinite.jsf.insurance.controller.InsuranceCoverageOptionController</managed-bean-class>
+		<managed-bean-name>insuranceCoverageOptionController
+		</managed-bean-name>
+		<managed-bean-class>com.infinite.jsf.insurance.controller.InsuranceCoverageOptionController
+		</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 
 		<!-- Inject DAO -->

@@ -25,7 +25,7 @@ body {
 	border-radius: 5px;
 	color: white;
 	margin: 20px auto;
-	width: 95%;
+	width: 90%;
 	box-sizing: border-box;
 }
 
@@ -47,37 +47,30 @@ body {
 	cursor: pointer;
 	font-size: 14px;
 }
-
 .header-bar .add-btn:hover {
 	background-color: #27ae60;
 }
-
 table {
 	width: 90%;
 	margin: 20px auto;
 	border-collapse: collapse;
 }
-
 th {
 	background-color: #2980b9;
 	color: white;
 	padding: 8px;
 }
-
 td {
 	background-color: #ecf0f1;
 	padding: 8px;
 	text-align: center;
 }
-
 tr:nth-child(even) td {
 	background-color: #d0e4f7;
 }
-
 tr:hover td {
 	background-color: #b2bec3;
 }
-
 table, th, td {
 	border: 1px solid #34495e;
 }
@@ -92,7 +85,6 @@ table, th, td {
     width: 90px; /* Fixed width for uniform size */
     text-align: center;
 }
-
 .action-btn:hover {
     background-color: #2980b9;
 }
