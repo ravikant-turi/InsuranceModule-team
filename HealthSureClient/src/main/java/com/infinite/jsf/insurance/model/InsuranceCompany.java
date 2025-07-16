@@ -3,9 +3,7 @@ package com.infinite.jsf.insurance.model;
 
 import java.io.Serializable;
 
-import lombok.Data;
 
-@Data
 public  class InsuranceCompany implements Serializable{
     private String companyId;
     private String name;
@@ -48,6 +46,25 @@ public  class InsuranceCompany implements Serializable{
 	}
 	public void setContactPhone(String contactPhone) {
 		this.contactPhone = contactPhone;
+	}
+	@Override
+	public String toString() {
+		return "InsuranceCompany [companyId=" + companyId + ", name=" + name + ", logoUrl=" + logoUrl + ", headOffice="
+				+ headOffice + ", contactEmail=" + contactEmail + ", contactPhone=" + contactPhone + "]";
+	}
+	public InsuranceCompany(String companyId, String name, String logoUrl, String headOffice, String contactEmail,
+			String contactPhone) {
+		super();
+		this.companyId = companyId;
+		this.name = name;
+		this.logoUrl = logoUrl;
+		this.headOffice = headOffice;
+		this.contactEmail = contactEmail;
+		this.contactPhone = contactPhone;
+	}
+	public InsuranceCompany() {
+		super();
+		// TODO Auto-generated constructor stub
 	} 
     
     

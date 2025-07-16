@@ -25,7 +25,7 @@ body {
 	border-radius: 5px;
 	color: white;
 	margin: 20px auto;
-	width: 95%;
+	width: 90%;
 	box-sizing: border-box;
 }
 
@@ -81,22 +81,6 @@ tr:hover td {
 table, th, td {
 	border: 1px solid #34495e;
 }
-.action-btn {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    width: 90px; /* Fixed width for uniform size */
-    text-align: center;
-}
-
-.action-btn:hover {
-    background-color: #2980b9;
-}
-
 </style>
 </head>
 <body>
@@ -106,8 +90,7 @@ table, th, td {
 		<h1>Insurance Plan List</h1>
 		<h:form>
 			<h:commandButton value="Add" action="addplan?faces-redirect=true"
-				styleClass="action-btn" style="background-color:gray"
-				 />
+				styleClass="add-btn" />
 		</h:form>
 	</div>
 
@@ -183,7 +166,7 @@ table, th, td {
 				<h:outputLabel value="Delete" />
 			</f:facet>
 			<h:form>
-				<h:commandButton value="Delete" styleClass="action-btn"
+				<h:commandButton value="Delete"
 					action="#{insurancePlanController.deletePlaneById(plan.planId)}"
 					onclick="return confirm('Are you sure you want to delete this company?');" />
 			</h:form>
@@ -194,7 +177,7 @@ table, th, td {
 				<h:outputLabel value="Update" />
 			</f:facet>
 			<h:form>
-				<h:commandButton value="Update" styleClass="action-btn"
+				<h:commandButton value="Update"
 					action="#{insurancePlanController.searchPlanById(plan.planId)}" />
 			</h:form>
 		</h:column>
@@ -204,7 +187,7 @@ table, th, td {
 				<h:outputLabel value="Details" />
 			</f:facet>
 			<h:form>
-				<h:commandButton value="Details" styleClass="action-btn"
+				<h:commandButton value="Details"
 					action="#{insurancePlanController.showPlanById(plan)}" />
 			</h:form>
 		</h:column>
@@ -213,7 +196,7 @@ table, th, td {
 				<h:outputLabel value="Add CoveragePlan" />
 			</f:facet>
 			<h:form>
-				<h:commandButton value="Add" styleClass="action-btn"
+				<h:commandButton value="Add"
 					action="#{insuranceCoverageOptionController.addcoverageOptionToPlan(plan)}" />
 			</h:form>
 		</h:column>

@@ -1,7 +1,5 @@
 package com.infinite.jsf.insurance.controller;
 
-import java.awt.image.renderable.ContextualRenderedImageFactory;
-import java.security.MessageDigest;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -12,9 +10,7 @@ import com.infinite.jsf.insurance.daoImpl.InsuranceCoverageOptionDaoImpl;
 import com.infinite.jsf.insurance.model.InsuranceCoverageOption;
 import com.infinite.jsf.insurance.model.InsurancePlan;
 
-import lombok.Data;
-
-@Data
+//this controller for coverageOption
 public class InsuranceCoverageOptionController {
 
 	private InsuranceCoverageOption coverageOption;
@@ -24,15 +20,17 @@ public class InsuranceCoverageOptionController {
 	private InsurancePlan insurancePlan;
 
 	private String showSuccessMessage;
-	
+
 	private String planId;
 
 	List<InsuranceCoverageOption> coverageOptionsType;
 
+	// get All coverageOptions
 	public List<InsuranceCoverageOption> findAllcoverageOption() {
 		return coverageOptionDao.findAllCoverageOption();
 	}
 
+	// add coverageOption
 	public String addcoverageOption(InsuranceCoverageOption coverageOption) {
 
 		if (validateInsuranceCoverageOptionWithFacesMessage(coverageOption)) {
@@ -44,21 +42,22 @@ public class InsuranceCoverageOptionController {
 		}
 		return null;
 	}
-	
-	// This is method is called from showPlan
+
+	// This is method is called from showPlan to add coverage
 	public String addcoverageOptionToPlan(InsurancePlan plan) {
-		 insurancePlan=plan;
-		 FacesContext context=FacesContext.getCurrentInstance();
-		 context.getExternalContext().getSessionMap().put("insurancePlan", plan);
-		 return "addCoverageOptionToPlan?faces-redirect=true";
+		insurancePlan = plan;
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("insurancePlan", plan);
+		return "addCoverageOptionToPlan?faces-redirect=true";
 
 	}
-	//Add the coverageOption and return to the showPlan 
-	public String addcoverageOptionToPlanHelper() {
-		 FacesContext context=FacesContext.getCurrentInstance();
 
-		insurancePlan=(InsurancePlan) context.getExternalContext().getSessionMap().get("insurancePlan");
-          coverageOption.setInsurancePlan(insurancePlan);
+	// Add the coverageOption and return to the showPlan
+	public String addcoverageOptionToPlanHelper() {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		insurancePlan = (InsurancePlan) context.getExternalContext().getSessionMap().get("insurancePlan");
+		coverageOption.setInsurancePlan(insurancePlan);
 		if (validateInsuranceCoverageOptionWithFacesMessage(coverageOption)) {
 
 			this.coverageOption.setInsurancePlan(insurancePlan);
@@ -69,17 +68,15 @@ public class InsuranceCoverageOptionController {
 		return null;
 	}
 
+	// helper method
 	public String showFullPlan(InsuranceCoverageOption cov) {
-		System.out.println("===================coverage Details");
 
-		System.out.println("==============");
-		System.out.println(cov);
 		coverageOption = cov;
-		// Put cov into session map
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedCoverage", cov);
 		return "searchcoveragedetails";
 	}
 
+	// helper method
 	public String getCoverageDetail() {
 
 		coverageOption = (InsuranceCoverageOption) FacesContext.getCurrentInstance().getExternalContext()
@@ -88,6 +85,7 @@ public class InsuranceCoverageOptionController {
 		return "searchcoveragedetails";
 	}
 
+	// searchInsurancePlanByPlanType
 	public String searchInsuranceCoverageOptionByPlanType(String planType) {
 
 		coverageOptionsType = coverageOptionDao.searchInsuranceCoverageOptionByPlanType(planType);
@@ -97,7 +95,7 @@ public class InsuranceCoverageOptionController {
 
 	}
 
-	// delete method
+	// delete CoverageOptions method
 	public String deleteCoverageOptions(InsuranceCoverageOption coverageOption) {
 
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -111,7 +109,7 @@ public class InsuranceCoverageOptionController {
 		return null;
 	}
 
-	// searchByid
+	// searchCoverageByid
 	public String searchCoverageOptionById(String coverageId) {
 		FacesContext context = FacesContext.getCurrentInstance();
 
@@ -127,6 +125,7 @@ public class InsuranceCoverageOptionController {
 
 	}
 
+//helper method to update
 	public String helpUpdatemethod(InsuranceCoverageOption coverageOption) {
 		FacesContext context = FacesContext.getCurrentInstance();
 
@@ -160,6 +159,8 @@ public class InsuranceCoverageOptionController {
 
 	}
 
+	// searchCoverageOptionById
+
 	public String searchCoverageOptionById(InsuranceCoverageOption coverageOption) {
 
 		this.coverageOption = coverageOptionDao.searchInsuranceCoverageOption(coverageOption);
@@ -167,6 +168,7 @@ public class InsuranceCoverageOptionController {
 
 	}
 
+	// validation CaverageOptions
 	public boolean validateInsuranceCoverageOptionWithFacesMessage(InsuranceCoverageOption option) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		boolean isValid = true;
@@ -200,7 +202,60 @@ public class InsuranceCoverageOptionController {
 
 		return isValid;
 	}
+	// GETTER AND SETTER
 
-//	<h:messages globalOnly="true" style="color:red" />
+	public InsuranceCoverageOption getCoverageOption() {
+		return coverageOption;
+	}
+
+	public void setCoverageOption(InsuranceCoverageOption coverageOption) {
+		this.coverageOption = coverageOption;
+	}
+
+	public InsuranceCoverageOptionDao getCoverageOptionDao() {
+		return coverageOptionDao;
+	}
+
+	public void setCoverageOptionDao(InsuranceCoverageOptionDao coverageOptionDao) {
+		this.coverageOptionDao = coverageOptionDao;
+	}
+
+	public InsurancePlan getInsurancePlan() {
+		return insurancePlan;
+	}
+
+	public void setInsurancePlan(InsurancePlan insurancePlan) {
+		this.insurancePlan = insurancePlan;
+	}
+
+	public String getShowSuccessMessage() {
+		return showSuccessMessage;
+	}
+
+	public void setShowSuccessMessage(String showSuccessMessage) {
+		this.showSuccessMessage = showSuccessMessage;
+	}
+
+	public String getPlanId() {
+		return planId;
+	}
+
+	public void setPlanId(String planId) {
+		this.planId = planId;
+	}
+
+	public List<InsuranceCoverageOption> getCoverageOptionsType() {
+		return coverageOptionsType;
+	}
+
+	public void setCoverageOptionsType(List<InsuranceCoverageOption> coverageOptionsType) {
+		this.coverageOptionsType = coverageOptionsType;
+	}
+
 
 }
+
+
+
+//<h:messages globalOnly="true" style="color:red" />
+

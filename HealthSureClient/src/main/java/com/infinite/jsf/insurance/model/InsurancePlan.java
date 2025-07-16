@@ -1,8 +1,7 @@
  package com.infinite.jsf.insurance.model;
 import java.util.Date;
 
-import lombok.Data;
-@Data
+
 public class InsurancePlan {
     private String planId;
     private InsuranceCompany insuranceCompany; // FK (companyId)

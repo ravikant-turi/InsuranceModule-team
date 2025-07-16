@@ -14,6 +14,11 @@ body {
 	font-family: Arial, sans-serif;
 	background-color: #f2f2f2;
 }
+.button-center {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
 
 h1 {
 	text-align: center;
@@ -61,40 +66,56 @@ table, th, td {
 
 	<h:form>
 		<h:dataTable
-			value="#{insuranceCoverageOptionController.findAllcoverageOption()}"
+			value="#{insuranceCoverageOptionController.coverageOptionsType}"
 			var="cov" border="1">
 
 			<h:column>
-				<f:facet name="header">Coverage ID</f:facet>
+				<f:facet name="header">
+				<h:outputLabel value= "Coverage ID" />
+				</f:facet>
 				<h:outputText value="#{cov.coverageId}" />
 			</h:column>
 
 			<h:column>
-				<f:facet name="header">Plan ID</f:facet>
+				<f:facet name="header">
+				<h:outputLabel value = "Plan ID"/>
+				</f:facet>
 				<h:outputText value="#{cov.insurancePlan.planId}" />
 			</h:column>
 
 			<h:column>
-				<f:facet name="header">Premium Amount</f:facet>
+				<f:facet name="header">
+				<h:outputLabel value = "Premium Amount"/>
+				</f:facet>
 				<h:outputText value="#{cov.premiumAmount}" />
 			</h:column>
 
 			<h:column>
-				<f:facet name="header">Coverage Amount</f:facet>
+				<f:facet name="header">
+				<h:outputLabel value = "Coverage Amount"/>
+				</f:facet>
 				<h:outputText value="#{cov.coverageAmount}" />
 			</h:column>
 
 			<h:column>
-				<f:facet name="header">Status</f:facet>
+				<f:facet name="header">
+				<h:outputLabel value = "Status"/>
+				</f:facet>
 				<h:outputText value="#{cov.status}" />
 			</h:column>
 
 			<h:column>
-				<f:facet name="header">Search</f:facet>
-				<h:commandButton value="Search" action="#{insuranceCoverageOptionController.searchStatus(cov)}" />
+				<f:facet name="header">
+				<h:outputLabel value = "Details"/>
+				</f:facet>
+				<h:commandButton value="Details" action="#{insuranceCoverageOptionController.showFullPlan(cov)}" />
 			</h:column>
 
 		</h:dataTable>
+		 <div class="button-center">
+		
+		                <h:commandButton value="Back" action="companymenu.jsp" styleClass="simple-btn" />
+		</div>
 	</h:form>
 
 </body>

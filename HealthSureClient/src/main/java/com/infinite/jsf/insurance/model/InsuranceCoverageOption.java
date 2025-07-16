@@ -1,7 +1,6 @@
 package com.infinite.jsf.insurance.model;
 
-import lombok.Data;
-@Data
+
 public class InsuranceCoverageOption {
 	
     public String coverageId;
@@ -53,6 +52,28 @@ public class InsuranceCoverageOption {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "InsuranceCoverageOption [coverageId=" + coverageId + ", insurancePlan=" + insurancePlan
+				+ ", premiumAmount=" + premiumAmount + ", coverageAmount=" + coverageAmount + ", status=" + status
+				+ "]";
+	}
+
+	public InsuranceCoverageOption(String coverageId, InsurancePlan insurancePlan, double premiumAmount,
+			double coverageAmount, String status) {
+		super();
+		this.coverageId = coverageId;
+		this.insurancePlan = insurancePlan;
+		this.premiumAmount = premiumAmount;
+		this.coverageAmount = coverageAmount;
+		this.status = status;
+	}
+
+	public InsuranceCoverageOption() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
     
     

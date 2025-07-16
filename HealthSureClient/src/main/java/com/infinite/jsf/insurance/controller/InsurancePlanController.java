@@ -11,199 +11,234 @@ import com.infinite.jsf.insurance.daoImpl.InsurancePlanDaoImpl;
 import com.infinite.jsf.insurance.model.InsuranceCompany;
 import com.infinite.jsf.insurance.model.InsurancePlan;
 
-import lombok.Data;
-
-@Data
+//this controller contains all the method related to InsurancePlan
 public class InsurancePlanController {
 
 	private InsurancePlan insurancePlan;
 	private InsuranceCompany insuranceCompany;
-    private String showSuccessMessage ;
+	private String showSuccessMessage;
 	private InsurancePlanDao plandao = new InsurancePlanDaoImpl();
-	
-	
+
 //	=============methods==============
 
+//Show all InsurancePlan
 	public List<InsurancePlan> findAllPlan() {
 		return plandao.showAllPlans();
 	}
 
+//add InsurancePlan
 	public String addPlan(InsurancePlan insurancePlan) {
-		
 		insurancePlan.setInsuranceCompany(insuranceCompany);
-		if(validateInsurancePlanWithFacesMessage(insurancePlan)) {
+		if (validateInsurancePlanWithFacesMessage(insurancePlan)) {
 
 			plandao.addInsurancePlan(insurancePlan);
 
 			return "showplan?faces-redirect=true";
-			
+
 		}
-		
+
 		return null;
 
-
-	}  
+	}
+//search Plan By planId
 	public String searchPlanById(String planId) {
-		
-		FacesContext context=FacesContext.getCurrentInstance();
-		insurancePlan= plandao.searchInsurancePlanById(planId); 
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		insurancePlan = plandao.searchInsurancePlanById(planId);
 		System.out.println("=====search method is called==========");
 		System.out.println(insurancePlan);
-		
-		context.getExternalContext().getSessionMap().put("planId", planId);
-		
-		if(insurancePlan==null) {
-			context.addMessage(null,new FacesMessage("plan is not found with this id : "+planId ,null));
-			return null;	
-		}
-		
-		return "searchPlanById?faces-redirect=true";
-		
-	}
-	
-	public String deletePlaneById(String planId) {
-		FacesContext context=FacesContext.getCurrentInstance();
-		insurancePlan= plandao.searchInsurancePlanById(planId); 
-		if(insurancePlan==null) {
-			context.addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"plan is not found with this id : "+planId ,null));
-			return null;	
-		}
-		
-		plandao.deleteInsurancePlan(insurancePlan);
-		
-		showSuccessMessage = "plan deleted showsuccessfully!";
 
+		context.getExternalContext().getSessionMap().put("planId", planId);
+
+		if (insurancePlan == null) {
+			context.addMessage(null, new FacesMessage("plan is not found with this id : " + planId, null));
+			return null;
+		}
+
+		return "searchPlanById?faces-redirect=true";
+
+	}
+//delete operation By planId
+	public String deletePlaneById(String planId) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		insurancePlan = plandao.searchInsurancePlanById(planId);
+		if (insurancePlan == null) {
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "plan is not found with this id : " + planId, null));
+			return null;
+		}
+
+		plandao.deleteInsurancePlan(insurancePlan);
+
+		showSuccessMessage = "plan deleted showsuccessfully!";
 
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "company deleted succussfully!", null));
 
 		return "showplan?faces-redirect=true";
 	}
-	
-
-	
-  public String updateInsurancePlan(InsurancePlan plan) {
-	  FacesContext context=FacesContext.getCurrentInstance();
+//update plan 
+	public String updateInsurancePlan(InsurancePlan plan) {
+		FacesContext context = FacesContext.getCurrentInstance();
 //	  String planId=(String) context.getExternalContext().getSessionMap().get("planId");
 //	  plan.setPlanId(planId);
-	  System.out.println("=====update method is called==========");
+		System.out.println("=====update method is called==========");
 		System.out.println(plan);
-		
-	  if(validateInsurancePlanWithFacesMessage(plan)) {
-		  
-		  plandao.updateInsurancePlan(plan);
-		  return "showplan?faces-redirect=true";
-	  }
-	  
-	  
-	  
-	  context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"validation Fails",null));
-	  return null;
-  
-	  
-  }
-  
-  // show plan details 
-  
-  public String showPlanById(InsurancePlan plan) {
-	  insurancePlan=plan;
-	  return "showplanDetails?faces-redirect=true";
-}
 
-public boolean validateInsurancePlanWithFacesMessage(InsurancePlan plan) {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    boolean isValid = true;
+		if (validateInsurancePlanWithFacesMessage(plan)) {
 
-	    
+			plandao.updateInsurancePlan(plan);
+			return "showplan?faces-redirect=true";
+		}
 
-	    // Plan Name
-	    if (plan.getPlanName() == null || plan.getPlanName().trim().isEmpty()) {
-	        context.addMessage("companyForm:planName", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Plan name is required.", null));
-	        isValid = false;
-	    } else if (plan.getPlanName().trim().length() < 4) {
-	        context.addMessage("companyForm:planName", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Plan name must be at least 4 characters.", null));
-	        isValid = false;
-	    }
+		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "validation Fails", null));
+		return null;
 
-	    
-
-	    // Insurance Company
-	    if (plan.getInsuranceCompany() == null || plan.getInsuranceCompany().getCompanyId() == null) {
-	        context.addMessage("companyForm:companyId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Insurance company is required.", null));
-	        isValid = false;
-	    }
-
-	    // Description
-	    if (plan.getDescription() == null || plan.getDescription().trim().isEmpty()) {
-	        context.addMessage("companyForm:description", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Description is required.", null));
-	        isValid = false;
-	    } else if (plan.getDescription().trim().length() <= 5) {
-	        context.addMessage("companyForm:description", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Description must be more than 5 characters.", null));
-	        isValid = false;
-	    }
-
-	    // Available Cover Amounts (assume it's a String, convert to double if needed)
-	    try {
-	        double coverAmount = Double.parseDouble(plan.getAvailableCoverAmounts().trim());
-	        if (coverAmount <= 0) {
-	            context.addMessage("companyForm:cover", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cover amount must be positive.", null));
-	            isValid = false;
-	        }
-	    } catch (Exception e) {
-	        context.addMessage("companyForm:cover", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid cover amount.", null));
-	        isValid = false;
-	    }
-
-	    // Min Entry Age
-	    if (plan.getMinEntryAge() <= 0) {
-	        context.addMessage("companyForm:minAge", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Minimum age must be greater than 0.", null));
-	        isValid = false;
-	    }
-
-	    // Max Entry Age
-	    if (plan.getMaxEntryAge() <= 0 || plan.getMaxEntryAge() < plan.getMinEntryAge()) {
-	        context.addMessage("companyForm:maxAge", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Maximum age must be greater than minimum age.", null));
-	        isValid = false;
-	    }
-
-	    // Waiting Period (must be between 0 and 12)
-	    try {
-	        int waiting = Integer.parseInt(plan.getWaitingPeriod().trim());
-	        if (waiting < 0 || waiting > 12) {
-	            context.addMessage("companyForm:waitingPeriod", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Waiting period must be between 0 and 12 months.", null));
-	            isValid = false;
-	        }
-	    } catch (Exception e) {
-	        context.addMessage("companyForm:waitingPeriod", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid waiting period.", null));
-	        isValid = false;
-	    }
-
-	    // Periodic Diseases
-	    if (plan.getPeriodicDiseases() == null || plan.getPeriodicDiseases().trim().isEmpty()) {
-	        context.addMessage("companyForm:periodicDiseases", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Periodic diseases field is required.", null));
-	        isValid = false;
-	    }
-
-	    // Active On, Created On, Expire Date logic
-	    Date activeOn = plan.getActiveOn();
-	    Date createdOn = plan.getCreatedOn();
-	    Date expireDate = plan.getExpireDate();
-
-	    if (activeOn == null) {
-	        context.addMessage("companyForm:activeOn", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Active On date is required.", null));
-	        isValid = false;
-	    } else {
-	        if (createdOn != null && activeOn.before(createdOn)) {
-	            context.addMessage("companyForm:activeOn", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Active On date cannot be before Created On date.", null));
-	            isValid = false;
-	        }
-	        if (expireDate != null && activeOn.after(expireDate)) {
-	            context.addMessage("companyForm:activeOn", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Active On date cannot be after Expire date.", null));
-	            isValid = false;
-	        }
-	    }
-
-	    return isValid;
 	}
 
-	
+	// show plan details
+
+	public String showPlanById(InsurancePlan plan) {
+		insurancePlan = plan;
+		return "showplanDetails?faces-redirect=true";
+	}
+ // validation of plan
+	public boolean validateInsurancePlanWithFacesMessage(InsurancePlan plan) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		boolean isValid = true;
+
+		// Plan Name
+		if (plan.getPlanName() == null || plan.getPlanName().trim().isEmpty()) {
+			context.addMessage("companyForm:planName",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Plan name is required.", null));
+			isValid = false;
+		} else if (plan.getPlanName().trim().length() < 4) {
+			context.addMessage("companyForm:planName",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Plan name must be at least 4 characters.", null));
+			isValid = false;
+		}
+
+		// Insurance Company
+		if (plan.getInsuranceCompany() == null || plan.getInsuranceCompany().getCompanyId() == null) {
+			context.addMessage("companyForm:companyId",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Insurance company is required.", null));
+			isValid = false;
+		}
+
+		// Description
+		if (plan.getDescription() == null || plan.getDescription().trim().isEmpty()) {
+			context.addMessage("companyForm:description",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Description is required.", null));
+			isValid = false;
+		} else if (plan.getDescription().trim().length() <= 5) {
+			context.addMessage("companyForm:description",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Description must be more than 5 characters.", null));
+			isValid = false;
+		}
+
+		// Available Cover Amounts (assume it's a String, convert to double if needed)
+		try {
+			double coverAmount = Double.parseDouble(plan.getAvailableCoverAmounts().trim());
+			if (coverAmount <= 0) {
+				context.addMessage("companyForm:cover",
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cover amount must be positive.", null));
+				isValid = false;
+			}
+		} catch (Exception e) {
+			context.addMessage("companyForm:cover",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid cover amount.", null));
+			isValid = false;
+		}
+
+		// Min Entry Age
+		if (plan.getMinEntryAge() <= 0) {
+			context.addMessage("companyForm:minAge",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Minimum age must be greater than 0.", null));
+			isValid = false;
+		}
+
+		// Max Entry Age
+		if (plan.getMaxEntryAge() <= 0 || plan.getMaxEntryAge() < plan.getMinEntryAge()) {
+			context.addMessage("companyForm:maxAge", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Maximum age must be greater than minimum age.", null));
+			isValid = false;
+		}
+
+		// Waiting Period (must be between 0 and 12)
+		try {
+			int waiting = Integer.parseInt(plan.getWaitingPeriod().trim());
+			if (waiting < 0 || waiting > 12) {
+				context.addMessage("companyForm:waitingPeriod", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Waiting period must be between 0 and 12 months.", null));
+				isValid = false;
+			}
+		} catch (Exception e) {
+			context.addMessage("companyForm:waitingPeriod",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid waiting period.", null));
+			isValid = false;
+		}
+
+		// Periodic Diseases
+		if (plan.getPeriodicDiseases() == null || plan.getPeriodicDiseases().trim().isEmpty()) {
+			context.addMessage("companyForm:periodicDiseases",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Periodic diseases field is required.", null));
+			isValid = false;
+		}
+
+		// Active On, Created On, Expire Date logic
+		Date activeOn = plan.getActiveOn();
+		Date createdOn = plan.getCreatedOn();
+		Date expireDate = plan.getExpireDate();
+
+		if (activeOn == null) {
+			context.addMessage("companyForm:activeOn",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Active On date is required.", null));
+			isValid = false;
+		} else {
+			if (createdOn != null && activeOn.before(createdOn)) {
+				context.addMessage("companyForm:activeOn", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Active On date cannot be before Created On date.", null));
+				isValid = false;
+			}
+			if (expireDate != null && activeOn.after(expireDate)) {
+				context.addMessage("companyForm:activeOn", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Active On date cannot be after Expire date.", null));
+				isValid = false;
+			}
+		}
+
+		return isValid;
+	}
+//Getter and Setters
+	public InsurancePlan getInsurancePlan() {
+		return insurancePlan;
+	}
+
+	public void setInsurancePlan(InsurancePlan insurancePlan) {
+		this.insurancePlan = insurancePlan;
+	}
+
+	public InsuranceCompany getInsuranceCompany() {
+		return insuranceCompany;
+	}
+
+	public void setInsuranceCompany(InsuranceCompany insuranceCompany) {
+		this.insuranceCompany = insuranceCompany;
+	}
+
+	public String getShowSuccessMessage() {
+		return showSuccessMessage;
+	}
+
+	public void setShowSuccessMessage(String showSuccessMessage) {
+		this.showSuccessMessage = showSuccessMessage;
+	}
+
+	public InsurancePlanDao getPlandao() {
+		return plandao;
+	}
+
+	public void setPlandao(InsurancePlanDao plandao) {
+		this.plandao = plandao;
+	}
+
 }
