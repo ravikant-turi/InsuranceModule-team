@@ -115,10 +115,18 @@ textarea {
 	margin-bottom: 10px;
 }
 
-.center-button-container {
+.button-row {
 	display: flex;
-	justify-content: center;
-	margin-top: 1px;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.left-btn {
+	margin-right: auto;
+}
+
+.right-btn {
+	margin-left: auto;
 }
 
 .action-btn {
@@ -164,9 +172,9 @@ form {
 	<div class="main-container">
 		<h:messages globalOnly="true" style="color:red" />
 
-		<!-- Add Insurance Plan Form -->
+		<!-- show Insurance Plan Form -->
 		<div class="header-container">
-			<h3 class="section-title">Add Insurance Plan</h3>
+			<h3 class="section-title">show Insurance Plan</h3>
 		</div>
 
 		<h:form id="companyForm">
@@ -175,31 +183,30 @@ form {
 				<!-- Row 1 -->
 				<div class="form-row">
 					<div class="form-group">
-						<label>Company ID:</label>
-						<h:inputText id="companyId" value="#{insuranceCompany.companyId}" />
+						<label>Company Name:</label>
+						<h:inputText id="companyId"
+							value="#{insurancePlanController.insuranceCompany.name}"
+							readonly="true" />
 						<br />
 						<h:message for="companyId" styleClass="error" />
 
 					</div>
 					<div class="form-group">
 						<label>Plan Name:</label>
-						<h:inputText id="planName" value="#{insurancePlan.planName}" />
+						<h:inputText id="planName"
+							value="#{insurancePlanController.insurancePlan.planName}"
+							readonly="true" />
 						<h:message for="planName" styleClass="error" />
 						<br />
 
 					</div>
 					<div class="form-group">
 						<label>Plan Type:</label>
-						<h:selectOneMenu id="planType"
-							value="#{insurancePlanController.insurancePlan.planType}">
-							<f:selectItem itemLabel="--Select--" itemValue="" />
-							<f:selectItem itemLabel="INDIVIDUAL" itemValue="SELF" />
-							<f:selectItem itemLabel="FAMILY" itemValue="FAMILY" />
-							<f:selectItem itemLabel="SENIOR" itemValue="SENIOR" />
-							<f:selectItem itemLabel="SELF" itemValue="CRITICAL_ILLNESS" />
-							<f:selectItem itemLabel="FAMILY" itemValue="EPIDEMIC_PROTECT" />
-							<f:selectItem itemLabel="SENIOR" itemValue="SUPER_ELITE" />
-						</h:selectOneMenu>
+						<h:inputText id="planType"
+							value="#{insurancePlanController.insurancePlan.planType}"
+							readonly="true">
+
+						</h:inputText>
 						<br />
 						<h:message for="planType" styleClass="error" />
 
@@ -210,14 +217,18 @@ form {
 				<div class="form-row">
 					<div class="form-group">
 						<label>Min Entry Age:</label>
-						<h:inputText id="minAge" value="#{insurancePlan.minEntryAge}" />
+						<h:inputText id="minAge"
+							value="#{insurancePlanController.insurancePlan.minEntryAge}"
+							readonly="true" />
 						<h:message for="minAge" styleClass="error" />
 						<br />
 
 					</div>
 					<div class="form-group">
 						<label>Max Entry Age:</label>
-						<h:inputText id="maxAge" value="#{insurancePlan.maxEntryAge}" />
+						<h:inputText id="maxAge"
+							value="#{insurancePlanController.insurancePlan.maxEntryAge}"
+							readonly="true" />
 						<h:message for="maxAge" styleClass="error" />
 						<br />
 
@@ -225,7 +236,8 @@ form {
 					<div class="form-group">
 						<label>Description:</label>
 						<h:inputTextarea id="description"
-							value="#{insurancePlan.description}" rows="2" cols="20" />
+							value="#{insurancePlanController.insurancePlan.description}"
+							rows="2" cols="20" readonly="true" />
 						<h:message for="description" styleClass="error" />
 						<br />
 
@@ -237,7 +249,8 @@ form {
 					<div class="form-group">
 						<label>Coverage Amounts:</label>
 						<h:inputText id="cover"
-							value="#{insurancePlanController.insurancePlan.availableCoverAmounts}" />
+							value="#{insurancePlanController.insurancePlan.availableCoverAmounts}"
+							readonly="true" />
 						<h:message for="cover" styleClass="error" />
 						<br />
 
@@ -245,14 +258,17 @@ form {
 					<div class="form-group">
 						<label>Waiting Period:</label>
 						<h:inputText id="waitingPeriod"
-							value="#{insurancePlan.waitingPeriod}" />
+							value="#{insurancePlanController.insurancePlan.waitingPeriod}"
+							readonly="true" />
 						<h:message for="waitingPeriod" styleClass="error" />
 						<br />
 
 					</div>
 					<div class="form-group">
 						<label>Active On (YYYY-MM-dd):</label>
-						<h:inputText id="activeOn" value="#{insurancePlan.activeOn}">
+						<h:inputText id="activeOn"
+							value="#{insurancePlanController.insurancePlan.activeOn}"
+							readonly="true">
 							<f:convertDateTime pattern="yyyy-MM-dd" />
 						</h:inputText>
 						<h:message for="activeOn" styleClass="error" />
@@ -265,12 +281,10 @@ form {
 				<div class="form-row">
 					<div class="form-group">
 						<label>Periodic Diseases:</label>
-						<h:selectOneMenu id="periodicDiseases"
-							value="#{insurancePlan.periodicDiseases}">
-							<f:selectItem itemLabel="--Select--" itemValue="" />
-							<f:selectItem itemLabel="YES" itemValue="YES" />
-							<f:selectItem itemLabel="NO" itemValue="NO" />
-						</h:selectOneMenu>
+						<h:inputText id="periodicDiseases"
+							value="#{insurancePlanController.insurancePlan.periodicDiseases}"
+							readonly="true">
+						</h:inputText>
 					</div>
 					<br />
 					<h:message for="periodicDiseases" styleClass="error" />
@@ -278,64 +292,70 @@ form {
 				</div>
 
 				<!-- Coverage Options -->
-				<h3>Add Coverage Options</h3>
+				<h3>show Coverage Options</h3>
 				<div class="form-row">
 
 					<!-- Coverage Option 1 -->
 					<div class="coverage-box">
-						<h3>Add Silver Option</h3>
+						<h3>Silver Option</h3>
 						<label>Premium Amount:</label>
 						<h:inputText id="PremiumAmount"
-							value="#{insurancePlanController.coverageOption1.premiumAmount}" />
+							value="#{insurancePlanController.coverageOption1.premiumAmount}"
+							readonly="true" />
 						<h:message for="PremiumAmount" styleClass="error" />
 
 						<label>Coverage Amount:</label>
 						<h:inputText id="CoverageAmount"
-							value="#{insurancePlanController.coverageOption1.coverageAmount}" />
+							value="#{insurancePlanController.coverageOption1.coverageAmount}"
+							readonly="true" />
 						<h:message for="CoverageAmount" styleClass="error" />
 
 					</div>
 
 					<!-- Coverage Option 2 -->
 					<div class="coverage-box">
-						<h3>Add Gold Option</h3>
+						<h3>Gold Option</h3>
 						<label>Premium Amount:</label>
 						<h:inputText
-							value="#{insurancePlanController.coverageOption2.premiumAmount}" />
+							value="#{insurancePlanController.coverageOption2.premiumAmount}"
+							readonly="true" />
 
 						<label>Coverage Amount:</label>
 						<h:inputText
-							value="#{insurancePlanController.coverageOption2.coverageAmount}" />
+							value="#{insurancePlanController.coverageOption2.coverageAmount}"
+							readonly="true" />
 
 
 					</div>
 
 					<!-- Coverage Option 3 -->
 					<div class="coverage-box">
-						<h3>Add Platinum Option</h3>
+						<h3>Platinum Option</h3>
 						<label>Premium Amount:</label>
 						<h:inputText
-							value="#{insurancePlanController.coverageOption3.premiumAmount}" />
+							value="#{insurancePlanController.coverageOption3.premiumAmount}"
+							readonly="true" />
 
 						<label>Coverage Amount:</label>
 						<h:inputText
-							value="#{insurancePlanController.coverageOption3.coverageAmount}" />
+							value="#{insurancePlanController.coverageOption3.coverageAmount}"
+							readonly="true" />
+
 
 					</div>
-				</div>
-
-				<!-- Submit Button -->
-				<div class="center-button-container">
-					<h:commandButton value="SUBMIT"
-						action="#{insurancePlanController.addInsurancePlanWithCoveragePlan}"
-						styleClass="action-btn" />
-				</div>
-
-			</div>
-		</h:form>
+					
+					
+					</h:form>
+		
 
 
 	</div>
+					<div class="button-row">
+						<h:commandButton value="Back" action="showplan.jsp"
+							styleClass="action-btn left-btn" />
+						<h:commandButton value="Home" action="companymenu.jsp"
+							styleClass="action-btn right-btn" />
+					</div>
 </body>
 
 	</html>

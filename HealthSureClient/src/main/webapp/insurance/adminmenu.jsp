@@ -94,7 +94,7 @@ footer {
 </head>
 <body>
 
-	<header> Admin Dashboard </header>
+	<header> Admin Dashboard  </header>
 
 	<div class="welcome">Welcome to the Admin Control Panel. Please
 		manage your insurance system efficiently.</div>

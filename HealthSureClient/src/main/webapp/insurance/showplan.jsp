@@ -171,7 +171,7 @@ table, th, td {
 			</f:facet>
 			<h:form>
 				<h:commandButton value="Update" styleClass="action-btn"
-					action="#{insurancePlanController.searchPlanById(plan.planId)}" />
+					action="#{insurancePlanController.showPlanDetailsToUpdate(plan.planId)}" />
 			</h:form>
 		</h:column>
 
@@ -181,7 +181,7 @@ table, th, td {
 			</f:facet>
 			<h:form>
 				<h:commandButton value="Details" styleClass="action-btn"
-					action="#{insurancePlanController.showPlanWithCoveragDetailsByplanId(plan.planId)}" />
+					action="#{insurancePlanController.showPlanDetailsWithCoveragePlan(plan.planId)}" />
 			</h:form>
 		</h:column>
 		

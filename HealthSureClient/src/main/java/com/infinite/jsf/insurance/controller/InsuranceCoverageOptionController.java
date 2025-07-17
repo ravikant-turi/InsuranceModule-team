@@ -13,10 +13,8 @@ import com.infinite.jsf.insurance.model.InsurancePlan;
 //this controller for coverageOption
 public class InsuranceCoverageOptionController {
 
-	private InsuranceCoverageOption coverageOption1;
 	private InsuranceCoverageOption coverageOption;
-	private InsuranceCoverageOption coverageOption2;
-	private InsuranceCoverageOption coverageOption3;
+	
 
 	private InsuranceCoverageOptionDao coverageOptionDao = new InsuranceCoverageOptionDaoImpl();;
 
@@ -255,29 +253,9 @@ public class InsuranceCoverageOptionController {
 		this.coverageOptionsType = coverageOptionsType;
 	}
 
-	public InsuranceCoverageOption getCoverageOption1() {
-		return coverageOption1;
-	}
+	
 
-	public void setCoverageOption1(InsuranceCoverageOption coverageOption1) {
-		this.coverageOption1 = coverageOption1;
-	}
-
-	public InsuranceCoverageOption getCoverageOption2() {
-		return coverageOption2;
-	}
-
-	public void setCoverageOption2(InsuranceCoverageOption coverageOption2) {
-		this.coverageOption2 = coverageOption2;
-	}
-
-	public InsuranceCoverageOption getCoverageOption3() {
-		return coverageOption3;
-	}
-
-	public void setCoverageOption3(InsuranceCoverageOption coverageOption3) {
-		this.coverageOption3 = coverageOption3;
-	}
+	
 
 
 }

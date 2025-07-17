@@ -109,16 +109,60 @@ html, body {
 .footer p {
 	margin: 5px 0;
 }
+.header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.header img {
+    height: 60px;
+    width: auto;
+}
+
+.header h1 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+    font-size: 24px;
+}
+
+.button-container {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.create-btn {
+    height: 40px;
+    width: 100px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
 </style>
 </head>
 <body>
 	<div class="wrapper">
+	<h:form>
+        <div class="button-container">
+            <h:commandButton value="create" action="showplan.jsp" styleClass="action-btn create-btn" />
+        </div>
+    </h:form>
 		<div class="header">
-			<img
-				src="/HealthSureClient/resources/media/images/Insurance/comapany.png"
-				alt="Company Logo" />
-			<h1>HealthSure Insurance Company</h1>
-		</div>
+    <img src="/HealthSureClient/resources/media/images/Insurance/comapany.png" alt="Company Logo" />
+    <h1>LifeSecure Health</h1>
+    <h:form>
+        <div class="button-container">
+            <h:commandButton value="create" action="showplan.jsp" styleClass="action-btn create-btn" />
+        </div>
+    </h:form>
+    
+     
+</div>
+		
 
 		<div class="welcome-title">Welcome to Our Insurance Company</div>
 

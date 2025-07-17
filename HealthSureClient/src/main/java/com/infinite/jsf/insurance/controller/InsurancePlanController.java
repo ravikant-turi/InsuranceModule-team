@@ -19,9 +19,9 @@ public class InsurancePlanController {
 	private InsurancePlan insurancePlan;
 	private InsuranceCompany insuranceCompany;
 	private String showSuccessMessage;
-	private InsuranceCoverageOption coverageOption1;
-	private InsuranceCoverageOption coverageOption2;
-	private InsuranceCoverageOption coverageOption3;
+	private InsuranceCoverageOption coverageOption1 = new InsuranceCoverageOption();
+	private InsuranceCoverageOption coverageOption2 = new InsuranceCoverageOption();
+	private InsuranceCoverageOption coverageOption3 = new InsuranceCoverageOption();
 	private InsuranceCoverageOptionDao insuranceCoverageOptionDao;
 	private InsurancePlanDao plandao = new InsurancePlanDaoImpl();
 	private List<InsuranceCoverageOption> planwithCovrageDetailsList;
@@ -68,12 +68,13 @@ public class InsurancePlanController {
 
 		}
 
-		if (validateInsurancePlanWithFacesMessage(insurancePlan)) {
+		if (validateInsurancePlanWithFacesMessage(insurancePlan)
+				|| validateInsuranceCoverageOptionWithFacesMessage(coverageOption1)) {
 			plandao.addInsurancePlan(insurancePlan);
 
 			InsuranceCoverageOption[] options = { coverageOption1, coverageOption2, coverageOption3 };
 			for (InsuranceCoverageOption option : options) {
-				if (option != null && validateInsuranceCoverageOptionWithFacesMessage(option)) {
+				if (option != null) {
 					option.setInsurancePlan(insurancePlan);
 					insuranceCoverageOptionDao.addInsuranceCoverageOption(option);
 				}
@@ -82,6 +83,75 @@ public class InsurancePlanController {
 		}
 
 		return null;
+	}
+
+	// CompletePlanDetailsTest.jsp : show full details by planId
+	public String showPlanDetailsWithCoveragePlan(String planId) {
+
+		List<InsuranceCoverageOption> list = insuranceCoverageOptionDao.searchInsuranceCoverageOptionByPlanId(planId);
+		coverageOption1 = list.get(0);
+		coverageOption2 = list.get(1);
+		coverageOption3 = list.get(2);
+		insurancePlan = list.get(0).insurancePlan;
+		insuranceCompany = list.get(0).insurancePlan.getInsuranceCompany();
+		System.out.println("=============\n" + coverageOption1);
+		System.out.println(coverageOption2);
+		System.out.println(coverageOption3);
+		System.out.println(insurancePlan);
+		System.out.println(insuranceCompany);
+
+		return "CompletePlanDetailsTest?faces-redirect=true";
+	}
+//	CompletePlanUpdateTest.jsp
+	public String showPlanDetailsToUpdate(String planId) {
+		List<InsuranceCoverageOption> list = insuranceCoverageOptionDao.searchInsuranceCoverageOptionByPlanId(planId);
+		coverageOption1 = list.get(0);
+		coverageOption2 = list.get(1);
+		coverageOption3 = list.get(2);
+		insurancePlan = list.get(0).insurancePlan;
+		insuranceCompany = list.get(0).insurancePlan.getInsuranceCompany();
+		System.out.println("=============\n" + coverageOption1);
+		System.out.println(coverageOption2);
+		System.out.println(coverageOption3);
+		System.out.println(insurancePlan);
+		System.out.println(insuranceCompany);
+		return "CompletePlanUpdateTest?faces-redirect=true";
+	}
+//update and back to menu
+	public String updatePlanDetailsWithCoveragePlan() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		insurancePlan.setInsuranceCompany(insuranceCompany);
+
+		System.out.println("=============================");
+		System.out.println(insuranceCompany);
+		System.out.println(insurancePlan);
+		System.out.println(coverageOption1);
+		System.out.println(coverageOption2);
+		System.out.println(coverageOption3);
+
+		if (coverageOption1.coverageId == null && coverageOption2.coverageId == null
+				&& coverageOption3.coverageId == null) {
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "No coverage options provided", null));
+
+		}
+
+		if (validateInsurancePlanWithFacesMessage(insurancePlan)
+				|| validateInsuranceCoverageOptionWithFacesMessage(coverageOption1)) {
+			plandao.updateInsurancePlan(insurancePlan);
+
+			InsuranceCoverageOption[] options = { coverageOption1, coverageOption2, coverageOption3 };
+			for (InsuranceCoverageOption option : options) {
+				if (option != null) {
+					option.setInsurancePlan(insurancePlan);
+					insuranceCoverageOptionDao.updateInsuranceCoverageOption(option);
+				}
+			}
+			return "showplan?faces-redirect=true";
+		}
+
+		return null;
+
 	}
 
 //search Plan By planId
@@ -262,13 +332,13 @@ public class InsurancePlanController {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Periodic diseases field is required.", null));
 			isValid = false;
 		}
-		
+
 		// planType
-				if (plan.getPlanType() == null || plan.getPlanType().toString().isEmpty()) {
-					context.addMessage("companyForm:planType",
-							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Plan Type  field is required.", null));
-					isValid = false;
-				}
+		if (plan.getPlanType() == null || plan.getPlanType().toString().isEmpty()) {
+			context.addMessage("companyForm:planType",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Plan Type  field is required.", null));
+			isValid = false;
+		}
 
 		// Active On, Created On, Expire Date logic
 		Date activeOn = plan.getActiveOn();
@@ -320,8 +390,8 @@ public class InsurancePlanController {
 					"Coverage amount must be between ₹1,00,000 (1L) and ₹5,00,00,000 (5Cr).", null));
 			isValid = false;
 		}
-		//option.premiumAmount > option.coverageAmount
-		if (option.premiumAmount > option.coverageAmount ) {
+		// option.premiumAmount > option.coverageAmount
+		if (option.premiumAmount > option.coverageAmount) {
 			context.addMessage("companyForm:CoverageAmount", new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Coverage amount must be greater than premiumAmount", null));
 			isValid = false;

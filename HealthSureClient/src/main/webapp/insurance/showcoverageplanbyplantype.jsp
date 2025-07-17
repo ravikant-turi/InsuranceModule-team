@@ -108,7 +108,7 @@ table, th, td {
 				<f:facet name="header">
 				<h:outputLabel value = "Details"/>
 				</f:facet>
-				<h:commandButton value="Details" action="#{insuranceCoverageOptionController.showFullPlan(cov)}" />
+				<h:commandButton value="Details" action="#{insurancePlanController.showPlanDetailsWithCoveragePlan(cov.insurancePlan.planId)}" />
 			</h:column>
 
 		</h:dataTable>
