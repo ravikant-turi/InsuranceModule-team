@@ -97,7 +97,7 @@ table, th, td {
 	<div class="header-bar">
 		<h1>Insurance Plan List</h1>
 		<h:form>
-			<h:commandButton value="Add" action="addplan?faces-redirect=true"
+			<h:commandButton value="Add" action="Testing?faces-redirect=true"
 				styleClass="action-btn" style="background-color:gray"
 				 />
 		</h:form>
@@ -107,12 +107,6 @@ table, th, td {
 	<h:dataTable value="#{insurancePlanController.findAllPlan()}"
 		var="plan" border="1" styleClass="insuranceTable">
 
-		<h:column>
-			<f:facet name="header">
-				<h:outputLabel value="Plan ID" />
-			</f:facet>
-			<h:outputText value="#{plan.planId}" />
-		</h:column>
 
 		<h:column>
 			<f:facet name="header">
@@ -170,17 +164,7 @@ table, th, td {
 			<h:outputText value="#{plan.description}" />
 		</h:column>
 
-		<h:column>
-			<f:facet name="header">
-				<h:outputLabel value="Delete" />
-			</f:facet>
-			<h:form>
-				<h:commandButton value="Delete" styleClass="action-btn"
-					action="#{insurancePlanController.deletePlaneById(plan.planId)}"
-					onclick="return confirm('Are you sure you want to delete this company?');" />
-			</h:form>
-		</h:column>
-
+		
 		<h:column>
 			<f:facet name="header">
 				<h:outputLabel value="Update" />
@@ -200,15 +184,7 @@ table, th, td {
 					action="#{insurancePlanController.showPlanWithCoveragDetailsByplanId(plan.planId)}" />
 			</h:form>
 		</h:column>
-		<h:column>
-			<f:facet name="header">
-				<h:outputLabel value="Add CoveragePlan" />
-			</f:facet>
-			<h:form>
-				<h:commandButton value="Add" styleClass="action-btn"
-					action="#{insuranceCoverageOptionController.addcoverageOptionToPlan(plan)}" />
-			</h:form>
-		</h:column>
+		
 
 	</h:dataTable>
 

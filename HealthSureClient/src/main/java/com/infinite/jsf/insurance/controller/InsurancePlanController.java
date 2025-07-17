@@ -24,7 +24,7 @@ public class InsurancePlanController {
 	private InsuranceCoverageOption coverageOption3;
 	private InsuranceCoverageOptionDao insuranceCoverageOptionDao;
 	private InsurancePlanDao plandao = new InsurancePlanDaoImpl();
-	private List<InsuranceCoverageOption>planwithCovrageDetailsList;
+	private List<InsuranceCoverageOption> planwithCovrageDetailsList;
 
 //	=============methods==============
 
@@ -51,35 +51,38 @@ public class InsurancePlanController {
 	// addInsurancePlanWithCoveragePlan directly
 
 	public String addInsurancePlanWithCoveragePlan() {
-	    FacesContext context = FacesContext.getCurrentInstance();
+		FacesContext context = FacesContext.getCurrentInstance();
 		insurancePlan.setInsuranceCompany(insuranceCompany);
 
-	    if (insurancePlan == null) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Plan is not found with this id 1", null));
-	        return null;
-	    }
+		System.out.println("=============================");
+		System.out.println(insuranceCompany);
+		System.out.println(insurancePlan);
+		System.out.println(coverageOption1);
+		System.out.println(coverageOption2);
+		System.out.println(coverageOption3);
 
+		if (coverageOption1.coverageId == null && coverageOption2.coverageId == null
+				&& coverageOption3.coverageId == null) {
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "No coverage options provided", null));
 
-	    if (coverageOption1 == null && coverageOption2 == null && coverageOption3 == null) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "No coverage options provided", null));
-	        return null;
-	    }
+		}
 
-	    if (validateInsurancePlanWithFacesMessage(insurancePlan)) {
-	        plandao.addInsurancePlan(insurancePlan);
+		if (validateInsurancePlanWithFacesMessage(insurancePlan)) {
+			plandao.addInsurancePlan(insurancePlan);
 
-	        InsuranceCoverageOption[] options = {coverageOption1, coverageOption2, coverageOption3};
-	        for (InsuranceCoverageOption option : options) {
-	            if (option != null && validateInsuranceCoverageOptionWithFacesMessage(option)) {
-	                option.setInsurancePlan(insurancePlan);
-	                insuranceCoverageOptionDao.addInsuranceCoverageOption(option);
-	            }
-	        }
-	    }
+			InsuranceCoverageOption[] options = { coverageOption1, coverageOption2, coverageOption3 };
+			for (InsuranceCoverageOption option : options) {
+				if (option != null && validateInsuranceCoverageOptionWithFacesMessage(option)) {
+					option.setInsurancePlan(insurancePlan);
+					insuranceCoverageOptionDao.addInsuranceCoverageOption(option);
+				}
+			}
+			return "showplan?faces-redirect=true";
+		}
 
-	    return "showplan?faces-redirect=true";
+		return null;
 	}
-
 
 //search Plan By planId
 	public String searchPlanById(String planId) {
@@ -144,9 +147,10 @@ public class InsurancePlanController {
 		insurancePlan = plan;
 		return "showplanDetails?faces-redirect=true";
 	}
-	//show all planDetailsandcoverageDetailsbyplanId
+
+	// show all planDetailsandcoverageDetailsbyplanId
 	public String showPlanWithCoveragDetailsByplanId(String plaId) {
-		planwithCovrageDetailsList=insuranceCoverageOptionDao.searchInsuranceCoverageOptionByPlanId(plaId);
+		planwithCovrageDetailsList = insuranceCoverageOptionDao.searchInsuranceCoverageOptionByPlanId(plaId);
 		return "showAllPlanByIdTest??faces-redirect=true";
 	}
 
@@ -167,7 +171,8 @@ public class InsurancePlanController {
 		}
 
 		// Insurance Company
-		if (plan.getInsuranceCompany() == null || plan.getInsuranceCompany().getCompanyId() == null) {
+		if (plan.getInsuranceCompany() == null || plan.getInsuranceCompany().getCompanyId() == null
+				|| plan.getInsuranceCompany().getCompanyId().trim().isEmpty()) {
 			context.addMessage("companyForm:companyId",
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Insurance company is required.", null));
 			isValid = false;
@@ -185,30 +190,55 @@ public class InsurancePlanController {
 		}
 
 		// Available Cover Amounts (assume it's a String, convert to double if needed)
-		try {
-			double coverAmount = Double.parseDouble(plan.getAvailableCoverAmounts().trim());
+
+		// Available Cover Amounts
+		String coverAmountStr = plan.getAvailableCoverAmounts();
+		if (coverAmountStr == null || coverAmountStr.trim().isEmpty()) {
+			context.addMessage("companyForm:cover",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cover amount is required.", null));
+			isValid = false;
+		} else if (!coverAmountStr.trim().matches("\\d+(\\.\\d+)?")) {
+			context.addMessage("companyForm:cover",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cover amount must be a valid number.", null));
+			isValid = false;
+		} else {
+			double coverAmount = Double.parseDouble(coverAmountStr.trim());
 			if (coverAmount <= 0) {
 				context.addMessage("companyForm:cover",
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cover amount must be positive.", null));
 				isValid = false;
 			}
-		} catch (Exception e) {
-			context.addMessage("companyForm:cover",
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid cover amount.", null));
-			isValid = false;
 		}
 
 		// Min Entry Age
-		if (plan.getMinEntryAge() <= 0) {
+		Integer minAge = plan.getMinEntryAge();
+		if (minAge == null) {
+			context.addMessage("companyForm:minAge",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Minimum age is required.", null));
+			isValid = false;
+		} else if (minAge <= 0) {
 			context.addMessage("companyForm:minAge",
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Minimum age must be greater than 0.", null));
 			isValid = false;
 		}
 
 		// Max Entry Age
-		if (plan.getMaxEntryAge() <= 0 || plan.getMaxEntryAge() < plan.getMinEntryAge()) {
+		Integer maxAge = plan.getMaxEntryAge();
+		if (maxAge == null) {
+			context.addMessage("companyForm:maxAge",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Maximum age is required.", null));
+			isValid = false;
+		} else if (maxAge <= 0) {
+			context.addMessage("companyForm:maxAge",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Maximum age must be greater than 0.", null));
+			isValid = false;
+		} else if (minAge != null && maxAge < minAge) {
 			context.addMessage("companyForm:maxAge", new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Maximum age must be greater than minimum age.", null));
+					"Maximum age must be greater than or equal to minimum age.", null));
+			isValid = false;
+		} else if (maxAge > 70) {
+			context.addMessage("companyForm:maxAge",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Maximum age must not be greater than 70.", null));
 			isValid = false;
 		}
 
@@ -232,6 +262,13 @@ public class InsurancePlanController {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Periodic diseases field is required.", null));
 			isValid = false;
 		}
+		
+		// planType
+				if (plan.getPlanType() == null || plan.getPlanType().toString().isEmpty()) {
+					context.addMessage("companyForm:planType",
+							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Plan Type  field is required.", null));
+					isValid = false;
+				}
 
 		// Active On, Created On, Expire Date logic
 		Date activeOn = plan.getActiveOn();
@@ -272,21 +309,21 @@ public class InsurancePlanController {
 
 		// Validate premiumAmount
 		if (option.premiumAmount < 500 || option.premiumAmount > 100000) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+			context.addMessage("companyForm:PremiumAmount", new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Premium amount must be between ₹500 and ₹100,000.", null));
 			isValid = false;
 		}
 
 		// Validate coverageAmount
 		if (option.coverageAmount < 100000 || option.coverageAmount > 50000000) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+			context.addMessage("companyForm:CoverageAmount", new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Coverage amount must be between ₹1,00,000 (1L) and ₹5,00,00,000 (5Cr).", null));
 			isValid = false;
 		}
-
-		// Validate status
-		if (option.status == null || option.status.trim().isEmpty()) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Status is required.", null));
+		//option.premiumAmount > option.coverageAmount
+		if (option.premiumAmount > option.coverageAmount ) {
+			context.addMessage("companyForm:CoverageAmount", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Coverage amount must be greater than premiumAmount", null));
 			isValid = false;
 		}
 

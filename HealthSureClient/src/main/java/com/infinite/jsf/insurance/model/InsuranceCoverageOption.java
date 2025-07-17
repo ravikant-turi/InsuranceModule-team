@@ -11,7 +11,7 @@ public class InsuranceCoverageOption {
     
     public double coverageAmount;
     
-    public String status = "ACTIVE";
+    public String status = "INACTIVE";
     
 
 	public String getCoverageId() {

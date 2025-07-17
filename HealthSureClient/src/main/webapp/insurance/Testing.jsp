@@ -152,56 +152,83 @@ h3 {
 form {
 	margin-top: 50px;
 }
+
+.error {
+	color: red;
+	font-size: 12px;
+}
 </style>
 
 </head>
 <body>
 	<div class="main-container">
+		<h:messages globalOnly="true" style="color:red" />
 
 		<!-- Add Insurance Plan Form -->
 		<div class="header-container">
 			<h3 class="section-title">Add Insurance Plan</h3>
 		</div>
 
-		<h:form>
+		<h:form id="companyForm">
 			<div class="form-box">
 
 				<!-- Row 1 -->
 				<div class="form-row">
 					<div class="form-group">
 						<label>Company ID:</label>
-						<h:inputText  value="#{insuranceCompany.companyId}" />
+						<h:inputText id="companyId" value="#{insuranceCompany.companyId}" />
+						<br />
+						<h:message for="companyId" styleClass="error" />
+
 					</div>
 					<div class="form-group">
 						<label>Plan Name:</label>
-						<h:inputText  value="#{insurancePlan.planName}" />
-						
+						<h:inputText id="planName" value="#{insurancePlan.planName}" />
+						<h:message for="planName" styleClass="error" />
+						<br />
+
 					</div>
 					<div class="form-group">
 						<label>Plan Type:</label>
-						<h:selectOneMenu value="#{insurancePlanController.insurancePlan.planType}">
+						<h:selectOneMenu id="planType"
+							value="#{insurancePlanController.insurancePlan.planType}">
 							<f:selectItem itemLabel="--Select--" itemValue="" />
 							<f:selectItem itemLabel="SELF" itemValue="INDIVIDUAL" />
 							<f:selectItem itemLabel="FAMILY" itemValue="FAMILY" />
 							<f:selectItem itemLabel="SENIOR" itemValue="SENIOR" />
+							<f:selectItem itemLabel="SELF" itemValue="CRITICAL_ILLNESS" />
+							<f:selectItem itemLabel="FAMILY" itemValue="EPIDEMIC_PROTECT" />
+							<f:selectItem itemLabel="SENIOR" itemValue="SUPER_ELITE" />
 						</h:selectOneMenu>
+						<br />
+						<h:message for="planType" styleClass="error" />
+
 					</div>
-				</div>  
+				</div>
 
 				<!-- Row 2 -->
 				<div class="form-row">
 					<div class="form-group">
 						<label>Min Entry Age:</label>
-						<h:inputText value="#{insurancePlan.minEntryAge}" />
+						<h:inputText id="minAge" value="#{insurancePlan.minEntryAge}" />
+						<h:message for="minAge" styleClass="error" />
+						<br />
+
 					</div>
 					<div class="form-group">
 						<label>Max Entry Age:</label>
-						<h:inputText value="#{insurancePlan.maxEntryAge}" />
+						<h:inputText id="maxAge" value="#{insurancePlan.maxEntryAge}" />
+						<h:message for="maxAge" styleClass="error" />
+						<br />
+
 					</div>
 					<div class="form-group">
 						<label>Description:</label>
-						<h:inputTextarea value="#{insurancePlan.description}" rows="2"
-							cols="20" />
+						<h:inputTextarea id="description"
+							value="#{insurancePlan.description}" rows="2" cols="20" />
+						<h:message for="description" styleClass="error" />
+						<br />
+
 					</div>
 				</div>
 
@@ -209,17 +236,28 @@ form {
 				<div class="form-row">
 					<div class="form-group">
 						<label>Coverage Amounts:</label>
-						<h:inputText value="#{insurancePlanController.insurancePlan.availableCoverAmounts}" />
+						<h:inputText id="cover"
+							value="#{insurancePlanController.insurancePlan.availableCoverAmounts}" />
+						<h:message for="cover" styleClass="error" />
+						<br />
+
 					</div>
 					<div class="form-group">
 						<label>Waiting Period:</label>
-						<h:inputText value="#{insurancePlan.waitingPeriod}" />
+						<h:inputText id="waitingPeriod"
+							value="#{insurancePlan.waitingPeriod}" />
+						<h:message for="waitingPeriod" styleClass="error" />
+						<br />
+
 					</div>
 					<div class="form-group">
 						<label>Active On (YYYY-MM-dd):</label>
-						<h:inputText value="#{insurancePlan.activeOn}">
+						<h:inputText id="activeOn" value="#{insurancePlan.activeOn}">
 							<f:convertDateTime pattern="yyyy-MM-dd" />
 						</h:inputText>
+						<h:message for="activeOn" styleClass="error" />
+						<br />
+
 					</div>
 				</div>
 
@@ -227,12 +265,16 @@ form {
 				<div class="form-row">
 					<div class="form-group">
 						<label>Periodic Diseases:</label>
-						<h:selectOneMenu value="#{insurancePlan.periodicDiseases}">
+						<h:selectOneMenu id="periodicDiseases"
+							value="#{insurancePlan.periodicDiseases}">
 							<f:selectItem itemLabel="--Select--" itemValue="" />
 							<f:selectItem itemLabel="YES" itemValue="YES" />
 							<f:selectItem itemLabel="NO" itemValue="NO" />
 						</h:selectOneMenu>
 					</div>
+					<br />
+					<h:message for="periodicDiseases" styleClass="error" />
+
 				</div>
 
 				<!-- Coverage Options -->
@@ -243,17 +285,22 @@ form {
 					<div class="coverage-box">
 						<h3>Add Silver Option</h3>
 						<label>Premium Amount:</label>
-						<h:inputText value="#{insurancePlanController.coverageOption1.premiumAmount}" />
+						<h:inputText id="PremiumAmount"
+							value="#{insurancePlanController.coverageOption1.premiumAmount}" />
+						<h:message for="PremiumAmount" styleClass="error" />
 
 						<label>Coverage Amount:</label>
-						<h:inputText value="#{coverageOption1.coverageAmount}" />
+						<h:inputText id="CoverageAmount"
+							value="#{coverageOption1.coverageAmount}" />
+						<h:message for="CoverageAmount" styleClass="error" />
+
 					</div>
 
 					<!-- Coverage Option 2 -->
 					<div class="coverage-box">
 						<h3>Add Gold Option</h3>
 						<label>Premium Amount:</label>
-						<h:inputText value="#{coverageOption2.premiumAmount}" />
+						<h:inputText value=" #{coverageOption2.premiumAmount}" />
 
 						<label>Coverage Amount:</label>
 						<h:inputText value="#{coverageOption2.coverageAmount}" />
@@ -265,10 +312,11 @@ form {
 					<div class="coverage-box">
 						<h3>Add Platinum Option</h3>
 						<label>Premium Amount:</label>
-						<h:inputText value="#{insurancePlanController.coverageOption3.premiumAmount}" />
+						<h:inputText value=" #{coverageOption3.premiumAmount}" />
 
 						<label>Coverage Amount:</label>
 						<h:inputText value="#{coverageOption3.coverageAmount}" />
+
 					</div>
 				</div>
 
@@ -281,10 +329,9 @@ form {
 
 			</div>
 		</h:form>
-		
+
 
 	</div>
-		<h:messages globalOnly="true" style="color:red" />
 </body>
 
 	</html>

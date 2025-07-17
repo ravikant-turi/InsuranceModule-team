@@ -184,7 +184,7 @@ h1::after {
 
 			</div>
 			 <div class="button-center">
-			                <h:commandButton value="Back" action="showcoverageplanbyplantype.jsp" styleClass="simple-btn" />
+			                <h:commandButton value="Back" action="showAllPlanByIdTest.jsp" styleClass="simple-btn" />
 			</div>
 		</h:form>
 	</div>
