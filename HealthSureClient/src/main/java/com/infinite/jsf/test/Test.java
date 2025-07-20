@@ -11,6 +11,8 @@ class Child extends Parent {
 public class Test {
     public static void main(String[] args) {
 
-      MailSend.sendInfo("turiravikant@gmail.com","subject" , "this is otp");
+//      MailSend.sendInfo("turiravikant@gmail.com","subject" , "this is otp");
+    	
+    	System.out.println("Hello world");
     } 
     }

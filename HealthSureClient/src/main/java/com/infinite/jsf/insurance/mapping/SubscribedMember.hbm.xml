@@ -1,26 +1,34 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC 
-  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class name="com.infinite.jsf.insurance.model.SubscribedMember" table="subscribed_members">
-    <id name="memberId" column="member_id" type="string">
-      <generator class="assigned"/>
-    </id>
+	<class name="com.infinite.jsf.insurance.model.SubscribedMember"
+		table="subscribed_member">
+		<id name="memberId" column="member_id">
+			<generator class="assigned" />
+		</id>
 
-    <many-to-one name="subscribe" class="com.infinite.jsf.insurance.model.Subscribe" column="subscribe_id" not-null="true" fetch="join"/>
 
-    <property name="fullName" column="full_name" type="string" not-null="true" length="100"/>
-    <property name="age" column="age" type="integer" not-null="false"/>
-    <property name="gender" column="gender" type="string" not-null="false" length="10"/>
-    <property name="relationWithProposer" column="relation_with_proposer" type="string" not-null="false" length="30"/>
-    <property name="aadharNo" column="aadhar_no" type="string" not-null="false" length="20"/>
-  </class>
- <query name="SubscribedMember.findBySubscribeId">
-    <![CDATA[
-        FROM SubscribedMember sm
-        WHERE sm.subscribe.subscribeId = :subscribeId
-    ]]>
-</query>
+		<property name="fullName" column="full_name" />
+		<property name="age" column="age" />
+
+		<property name="gender">
+			<column name="gender" not-null="true" />
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.infinite.jsf.insurance.model.Gender</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="relationWithProposer">
+			<column name="relation_with_proposer" not-null="true" />
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.infinite.jsf.insurance.model.RelationWithProposer</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+
+		<property name="aadharNo" column="aadhar_no" />
+	</class>
 </hibernate-mapping>
