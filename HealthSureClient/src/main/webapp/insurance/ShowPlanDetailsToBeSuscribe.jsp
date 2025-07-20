@@ -163,183 +163,277 @@ h2 {
 			</div>
 
 			<!-- Dynamic Input Fields Based on Plan Type -->
-			<h3>Member Details</h3>
 
-			<!-- FAMILY Plan: 1 Husband, 1 Wife, 4 Children -->
-			<h3>Member Details (FAMILY Plan)</h3>
+			<h:outputLabel value="Member Details (FAMILY Plan)"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+
+
 
 			<!-- HUSBAND -->
-			<h:outputLabel value="Husband Member ID:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Husband Member ID:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Husband Full Name:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Husband Full Name:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Husband Age:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Husband Age:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Husband Gender:" />
-			<h:selectOneMenu value="#{null}">
+			<h:outputLabel value="Husband Gender:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:selectOneMenu value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}">
 				<f:selectItem itemLabel="Select Gender" itemValue="#{null}" />
 				<f:selectItem itemLabel="MALE" itemValue="MALE" />
 				<f:selectItem itemLabel="FEMALE" itemValue="FEMALE" />
 				<f:selectItem itemLabel="OTHER" itemValue="OTHER" />
 			</h:selectOneMenu>
 
-			<h:outputLabel value="Relation with Proposer:" />
-			<h:selectOneMenu value="#{null}">
+			<h:outputLabel value="Relation with Proposer:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:selectOneMenu value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}">
 				<f:selectItem itemLabel="HUSBAND" itemValue="HUSBAND" />
 			</h:selectOneMenu>
 
-			<h:outputLabel value="Husband Aadhar No:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Husband Aadhar No:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+
 			<br />
 			<br />
+
 			<!-- WIFE -->
-			<h:outputLabel value="Wife Member ID:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Wife Member ID:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Wife Full Name:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Wife Full Name:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Wife Age:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Wife Age:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Wife Gender:" />
-			<h:selectOneMenu value="#{null}">
+			<h:outputLabel value="Wife Gender:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:selectOneMenu value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}">
 				<f:selectItem itemLabel="Select Gender" itemValue="#{null}" />
 				<f:selectItem itemLabel="MALE" itemValue="MALE" />
 				<f:selectItem itemLabel="FEMALE" itemValue="FEMALE" />
 				<f:selectItem itemLabel="OTHER" itemValue="OTHER" />
 			</h:selectOneMenu>
 
-			<h:outputLabel value="Relation with Proposer:" />
-			<h:selectOneMenu value="#{null}">
+			<h:outputLabel value="Relation with Proposer:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:selectOneMenu value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}">
 				<f:selectItem itemLabel="WIFE" itemValue="WIFE" />
 			</h:selectOneMenu>
 
-			<h:outputLabel value="Wife Aadhar No:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Wife Aadhar No:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<!-- CHILDREN -->
-			<h3>Child 1 Details</h3>
-			<h:outputLabel value="Member ID:" />
-			<h:inputText value="#{null}" />
+			<br />
+			<br />
 
-			<h:outputLabel value="Full Name:" />
-			<h:inputText value="#{null}" />
+			<!-- CHILD 1 -->
 
-			<h:outputLabel value="Age:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Child 1 Details (FAMILY Plan)"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Gender:" />
-			<h:selectOneMenu value="#{null}">
+			<h:outputLabel value="Member ID:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+
+			<h:outputLabel value="Full Name:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+
+			<h:outputLabel value="Age:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+
+			<h:outputLabel value="Gender:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:selectOneMenu value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}">
 				<f:selectItem itemLabel="Select Gender" itemValue="#{null}" />
 				<f:selectItem itemLabel="MALE" itemValue="MALE" />
 				<f:selectItem itemLabel="FEMALE" itemValue="FEMALE" />
 				<f:selectItem itemLabel="OTHER" itemValue="OTHER" />
 			</h:selectOneMenu>
 
-			<h:outputLabel value="Relation with Proposer:" />
-			<h:selectOneMenu value="#{null}">
+			<h:outputLabel value="Relation with Proposer:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:selectOneMenu value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}">
 				<f:selectItem itemLabel="CHILD" itemValue="CHILD" />
 			</h:selectOneMenu>
 
-			<h:outputLabel value="Aadhar No:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Aadhar No:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
 			<br />
 			<br />
 
-			<h3>Child 2 Details</h3>
-			<h:outputLabel value="Member ID:" />
-			<h:inputText value="#{null}" />
+			<!--  Child 2-->
+			<h:outputLabel value="Child 2 Details (FAMILY Plan)"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Full Name:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Member ID:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Age:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Full Name:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Gender:" />
-			<h:selectOneMenu value="#{null}">
+			<h:outputLabel value="Age:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+
+			<h:outputLabel value="Gender:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:selectOneMenu value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}">
 				<f:selectItem itemLabel="Select Gender" itemValue="#{null}" />
 				<f:selectItem itemLabel="MALE" itemValue="MALE" />
 				<f:selectItem itemLabel="FEMALE" itemValue="FEMALE" />
 				<f:selectItem itemLabel="OTHER" itemValue="OTHER" />
 			</h:selectOneMenu>
 
-			<h:outputLabel value="Relation with Proposer:" />
-			<h:selectOneMenu value="#{null}">
+			<h:outputLabel value="Relation with Proposer:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:selectOneMenu value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}">
 				<f:selectItem itemLabel="CHILD" itemValue="CHILD" />
 			</h:selectOneMenu>
 
-			<h:outputLabel value="Aadhar No:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Aadhar No:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
 			<br />
 			<br />
+			<!--Child 3,  -->
+			<h:outputLabel value="Child 3 Details (FAMILY Plan)"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h3>Child 3 Details</h3>
-			<h:outputLabel value="Member ID:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Member ID:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Full Name:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Full Name:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Age:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Age:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Gender:" />
-			<h:selectOneMenu value="#{null}">
+			<h:outputLabel value="Gender:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:selectOneMenu value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}">
 				<f:selectItem itemLabel="Select Gender" itemValue="#{null}" />
 				<f:selectItem itemLabel="MALE" itemValue="MALE" />
 				<f:selectItem itemLabel="FEMALE" itemValue="FEMALE" />
 				<f:selectItem itemLabel="OTHER" itemValue="OTHER" />
 			</h:selectOneMenu>
 
-			<h:outputLabel value="Relation with Proposer:" />
-			<h:selectOneMenu value="#{null}">
+			<h:outputLabel value="Relation with Proposer:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:selectOneMenu value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}">
 				<f:selectItem itemLabel="CHILD" itemValue="CHILD" />
 			</h:selectOneMenu>
 
-			<h:outputLabel value="Aadhar No:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Aadhar No:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
 			<br />
 			<br />
+			<!--  Child 4 -->
+			<h:outputLabel value="Child 4 Details (FAMILY Plan)"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h3>Child 4 Details</h3>
-			<h:outputLabel value="Member ID:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Member ID:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Full Name:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Full Name:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Age:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Age:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<h:outputLabel value="Gender:" />
-			<h:selectOneMenu value="#{null}">
+			<h:outputLabel value="Gender:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:selectOneMenu value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}">
 				<f:selectItem itemLabel="Select Gender" itemValue="#{null}" />
 				<f:selectItem itemLabel="MALE" itemValue="MALE" />
 				<f:selectItem itemLabel="FEMALE" itemValue="FEMALE" />
 				<f:selectItem itemLabel="OTHER" itemValue="OTHER" />
 			</h:selectOneMenu>
 
-			<h:outputLabel value="Relation with Proposer:" />
-			<h:selectOneMenu value="#{null}">
+			<h:outputLabel value="Relation with Proposer:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:selectOneMenu value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}">
 				<f:selectItem itemLabel="CHILD" itemValue="CHILD" />
 			</h:selectOneMenu>
 
-			<h:outputLabel value="Aadhar No:" />
-			<h:inputText value="#{null}" />
+			<h:outputLabel value="Aadhar No:"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
+			<h:inputText value="#{null}"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'FAMILY'}" />
 
-			<!-- Subscribe Button -->
-			<h:commandButton value="Subscribe" />
+			<br />
+			<br />
+
+
+
+
 
 			<!-- SENIOR Plan: Husband and Wife -->
-			<<h3>Member Details (SENIOR Plan)</h3>
+			<h:outputLabel value="Member Details (SENIOR Plan)"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SENIOR'}" />
+
 
 			<!-- HUSBAND -->
 			<h:outputLabel value="Husband Member ID:"
@@ -420,8 +514,20 @@ h2 {
 			<h:inputText value="#{null}"
 				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SENIOR'}" />
 
-			<!-- Individual Plans -->
-			<h3>Member Details (Individual Plan)</h3>
+			<!-- Individual Plans  	private String memberId;
+	private Subscribe subscribe;
+	private String fullName;
+	private Integer age;
+	private Gender gender;
+	private RelationWithProposer relationWithProposer;
+	private String aadharNo
+	 -->
+			<h:inputText value="Member Details (Individual
+				Plan)"
+				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SELF' or 
+                insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
+                insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
+                insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SUPER_ELITE'}" />
 
 			<!-- Member ID -->
 			<h:outputLabel value="Member ID:"
@@ -429,7 +535,7 @@ h2 {
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SUPER_ELITE'}" />
-			<h:inputText value="#{null}"
+			<h:inputText value="#{insuranceSubscribeController.subscribedMember1.memberId}"
 				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SELF' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
@@ -441,7 +547,7 @@ h2 {
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SUPER_ELITE'}" />
-			<h:inputText value="#{null}"
+			<h:inputText value="#{insuranceSubscribeController.subscribedMember1.fullName}"
 				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SELF' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
@@ -453,7 +559,7 @@ h2 {
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SUPER_ELITE'}" />
-			<h:inputText value="#{null}"
+			<h:inputText value="#{insuranceSubscribeController.subscribedMember1.age}"
 				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SELF' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
@@ -465,12 +571,12 @@ h2 {
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SUPER_ELITE'}" />
-			<h:selectOneMenu value="#{null}"
+			<h:selectOneMenu value="#{insuranceSubscribeController.subscribedMember1.gender}"
 				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SELF' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SUPER_ELITE'}">
-				<f:selectItem itemLabel="Select Gender" itemValue="#{null}" />
+				<f:selectItem itemLabel="Select Gender" itemValue="" />
 				<f:selectItem itemLabel="MALE" itemValue="MALE" />
 				<f:selectItem itemLabel="FEMALE" itemValue="FEMALE" />
 				<f:selectItem itemLabel="OTHER" itemValue="OTHER" />
@@ -482,7 +588,7 @@ h2 {
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SUPER_ELITE'}" />
-			<h:selectOneMenu value="#{null}"
+			<h:selectOneMenu value="#{insuranceSubscribeController.subscribedMember1.relationWithProposer}"
 				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SELF' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
@@ -496,12 +602,17 @@ h2 {
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SUPER_ELITE'}" />
-			<h:inputText value="#{null}"
+			<h:inputText value="#{insuranceSubscribeController.subscribedMember1.aadharNo}"
 				rendered="#{insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SELF' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'CRITICAL_ILLNESS' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'EPIDEMIC_PROTECT' or 
                 insuranceSubscribeController.coverageOption.insurancePlan.planType == 'SUPER_ELITE'}" />
 
+			<br />
+			<br />
+
+			<!-- Subscribe Button -->
+			<h:commandButton value="Subscribe" action="#{insuranceSubscribeController.subscribeToPlan(insuranceSubscribeController.coverageOption)}"/>
 		</h:form>
 
 	</body>

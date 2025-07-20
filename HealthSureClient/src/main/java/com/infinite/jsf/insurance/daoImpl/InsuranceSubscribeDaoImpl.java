@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 
 import com.infinite.jsf.insurance.dao.InsuranceSubscribeDao;
 import com.infinite.jsf.insurance.model.InsuranceCoverageOption;
+import com.infinite.jsf.insurance.model.Subscribe;
 import com.infinite.jsf.insurance.model.SubscribedMember;
 import com.infinite.jsf.util.SessionHelper;
 
@@ -22,7 +23,8 @@ public class InsuranceSubscribeDaoImpl implements InsuranceSubscribeDao {
 	@Override
 	public String addSubscribedPlanMember(SubscribedMember members) {
 		session = factory.openSession();
-		Transaction trans = session.getTransaction();
+		Transaction trans = session.beginTransaction();
+		members.setMemberId(generateNextSubscribedMemberId());
 		session.save(members);
 		trans.commit();
 		session.close();
@@ -57,12 +59,67 @@ public class InsuranceSubscribeDaoImpl implements InsuranceSubscribeDao {
 	public List<SubscribedMember> getSubscribeMeberByPolicyId(String policyId) {
 		List<SubscribedMember> optionsList;
 		session = factory.openSession();
-		Transaction trans = session.getTransaction();
+		Transaction trans = session.beginTransaction();
 		Query query = session.createQuery("from SubscribedMember where SubscribedMember");
 		optionsList = query.list();
 		trans.commit();
 		session.close();
 		return optionsList;
 	}
+
+	@Override
+	public String addSubscribe(Subscribe subscribe) {
+		session = factory.openSession();
+		Transaction trans = session.beginTransaction();
+		subscribe.setSubscribeId("SIM002");
+		subscribe.setRecipientId("H001");
+         session.save(subscribe);
+		trans.commit();
+		session.close();
+		return "success";
+	}
+	public String generateNextsubscribeId() {
+	    Session session = factory.openSession();
+
+	    String lastId = (String) session.createQuery(
+	        "SELECT c.subscribeId FROM subscribe c ORDER BY c.subscribeId DESC")
+	        .setMaxResults(1)
+	        .uniqueResult();
+
+	    session.close();
+
+	    int nextNum = 1;
+
+	    if (lastId != null && lastId.toUpperCase().startsWith("SUB") && lastId.length() == 6) {
+	        String numPart = lastId.substring(3); // "001"
+	        if (numPart.matches("\\d{3}")) {
+	            nextNum = Integer.parseInt(numPart) + 1;
+	        }
+	    }
+
+	    return String.format("SUB%03d", nextNum); // e.g., COM002
+	}
+	public String generateNextSubscribedMemberId() {
+	    Session session = factory.openSession();
+
+	    String lastId = (String) session.createQuery(
+	        "SELECT c.memberId FROM SubscribedMember c ORDER BY c.memberId DESC")
+	        .setMaxResults(1)
+	        .uniqueResult();
+
+	    session.close();
+
+	    int nextNum = 1;
+
+	    if (lastId != null && lastId.toUpperCase().startsWith("SIM") && lastId.length() == 6) {
+	        String numPart = lastId.substring(3); // "001"
+	        if (numPart.matches("\\d{3}")) {
+	            nextNum = Integer.parseInt(numPart) + 1;
+	        }
+	    }
+
+	    return String.format("SIM%03d", nextNum); // e.g., COM002
+	}
+
 
 }

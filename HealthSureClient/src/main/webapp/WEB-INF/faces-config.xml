@@ -203,6 +203,13 @@
 		</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>subscribedMember1</managed-bean-name>
+		<managed-bean-class>com.infinite.jsf.insurance.model.SubscribedMember
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
 
 	<!-- ✅ Controller Bean -->
 	<managed-bean>
@@ -220,6 +227,7 @@
 			<property-name>insuranceSubscribeDao</property-name>
 			<value>#{insuranceSubscribeDao}</value>
 		</managed-property>
+		
 		<managed-property>
 			<property-name>insuranceCompany</property-name>
 			<value>#{insuranceCompany}</value>
@@ -239,6 +247,18 @@
 		<managed-property>
 			<property-name>insuranceSubscribeDao</property-name>
 			<value>#{insuranceSubscribeDao}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>subscribedMember1</property-name>
+			<value>#{subscribedMember1}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>subscribedMember</property-name>
+			<value>#{subscribedMember}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>subscribe</property-name>
+			<value>#{subscribe}</value>
 		</managed-property>
 	</managed-bean>
 
