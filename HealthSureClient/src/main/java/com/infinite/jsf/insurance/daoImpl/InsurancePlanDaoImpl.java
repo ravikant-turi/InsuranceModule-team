@@ -1,11 +1,10 @@
 package com.infinite.jsf.insurance.daoImpl;
 
-import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -175,4 +174,7 @@ public class InsurancePlanDaoImpl implements InsurancePlanDao {
 		session.close();
 		return planTypeList;
 	}
+
+    
+
 }

@@ -362,9 +362,9 @@ input[readonly], textarea[readonly] {
 		</h:form>
 
 		<div class="button-row">
-			<h:commandButton value="Back" action="showplan.jsp"
+			<h:commandButton value="Back" action="InsuranceAdminDashBoard.jsp"
 				styleClass="action-btn left-btn" />
-			<h:commandButton value="Home" action="companymenu.jsp"
+			<h:commandButton value="Home" action="InsuranceAdminMenu.jsp"
 				styleClass="action-btn right-btn" />
 		</div>
 

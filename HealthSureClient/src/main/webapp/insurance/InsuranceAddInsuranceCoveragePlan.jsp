@@ -6,7 +6,7 @@
 	<!DOCTYPE html>
 	<html>
 <head>
-<title>Insurance Plan & Coverage Options</title>
+<title>Insurance Plan and Coverage Options</title>
 <style>
 body {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -133,6 +133,19 @@ textarea {
 	text-align: center;
 }
 
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
 .action-btn:hover {
 	background-color: #2980b9;
 }
@@ -162,7 +175,6 @@ form {
 </head>
 <body>
 	<div class="main-container">
-		<h:messages globalOnly="true" style="color:red" />
 
 		<!-- Add Insurance Plan Form -->
 		<div class="header-container">
@@ -189,7 +201,8 @@ form {
 
 					</div>
 					<div class="form-group">
-						<label>Plan Type:</label>
+						<h:outputLabel escape="false"
+							value=" <span style='color:red'>*</span>PlanType: " />
 						<h:selectOneMenu id="planType"
 							value="#{insurancePlanController.insurancePlan.planType}">
 							<f:selectItem itemLabel="--Select--" itemValue="" />
@@ -197,33 +210,39 @@ form {
 							<f:selectItem itemLabel="FAMILY" itemValue="FAMILY" />
 							<f:selectItem itemLabel="SENIOR" itemValue="SENIOR" />
 							<f:selectItem itemLabel="SELF" itemValue="CRITICAL_ILLNESS" />
-							<f:selectItem itemLabel="FAMILY" itemValue="EPIDEMIC_PROTECT" />
-							<f:selectItem itemLabel="SENIOR" itemValue="SUPER_ELITE" />
+							<f:selectItem itemLabel="EPIDEMIC_PROTECT"
+								itemValue="EPIDEMIC_PROTECT" />
+							<f:selectItem itemLabel="SUPER_ELITE" itemValue="SUPER_ELITE" />
 						</h:selectOneMenu>
 						<br />
 						<h:message for="planType" styleClass="error" />
 
 					</div>
+
+
 				</div>
 
 				<!-- Row 2 -->
 				<div class="form-row">
 					<div class="form-group">
-						<label>Min Entry Age:</label>
+						<h:outputLabel escape="false"
+							value="<span style='color:red'>*</span>Min Age: " />
 						<h:inputText id="minAge" value="#{insurancePlan.minEntryAge}" />
 						<h:message for="minAge" styleClass="error" />
 						<br />
 
 					</div>
 					<div class="form-group">
-						<label>Max Entry Age:</label>
+						<h:outputLabel escape="false"
+							value="<span style='color:red'>*</span>Max Age: " />
 						<h:inputText id="maxAge" value="#{insurancePlan.maxEntryAge}" />
 						<h:message for="maxAge" styleClass="error" />
 						<br />
 
 					</div>
 					<div class="form-group">
-						<label>Description:</label>
+						<h:outputLabel escape="false"
+							value="<span style='color:red'>*</span>Description: " />
 						<h:inputTextarea id="description"
 							value="#{insurancePlan.description}" rows="2" cols="20" />
 						<h:message for="description" styleClass="error" />
@@ -235,7 +254,8 @@ form {
 				<!-- Row 3 -->
 				<div class="form-row">
 					<div class="form-group">
-						<label>Coverage Amounts:</label>
+						<h:outputLabel escape="false"
+							value="<span style='color:red'>*</span>Available Amount: " />
 						<h:inputText id="cover"
 							value="#{insurancePlanController.insurancePlan.availableCoverAmounts}" />
 						<h:message for="cover" styleClass="error" />
@@ -243,7 +263,8 @@ form {
 
 					</div>
 					<div class="form-group">
-						<label>Waiting Period:</label>
+						<h:outputLabel escape="false"
+							value="<span style='color:red'>*</span>Waiting Period: " />
 						<h:inputText id="waitingPeriod"
 							value="#{insurancePlan.waitingPeriod}" />
 						<h:message for="waitingPeriod" styleClass="error" />
@@ -251,7 +272,8 @@ form {
 
 					</div>
 					<div class="form-group">
-						<label>Active On (YYYY-MM-dd):</label>
+						<h:outputLabel escape="false"
+							value="<span style='color:red'>*</span>Active On: " />
 						<h:inputText id="activeOn" value="#{insurancePlan.activeOn}">
 							<f:convertDateTime pattern="yyyy-MM-dd" />
 						</h:inputText>
@@ -271,10 +293,27 @@ form {
 							<f:selectItem itemLabel="YES" itemValue="YES" />
 							<f:selectItem itemLabel="NO" itemValue="NO" />
 						</h:selectOneMenu>
+						<br />
+						<h:message for="periodicDiseases" styleClass="error" />
 					</div>
 					<br />
-					<h:message for="periodicDiseases" styleClass="error" />
+					<div class="form-group">
+						<h:outputLabel escape="false"
+							value=" <span style='color:red'>*</span>DURATION: " />
+						<h:selectOneMenu id="yearsToAdd"
+							value="#{insurancePlanController.yearsToAdd}">
+							<f:selectItem itemLabel="--Select--" itemValue="0" />
+							<f:selectItem itemLabel="1 Years" itemValue="1" />
+							<f:selectItem itemLabel="2 Years" itemValue="2" />
+							<f:selectItem itemLabel="3 Years" itemValue="3" />
+							<f:selectItem itemLabel="5 Years" itemValue="5" />
+							<f:selectItem itemLabel="10 Years" itemValue="10" />
+							<f:selectItem itemLabel="12 Years" itemValue="12" />
+						</h:selectOneMenu>
+						<br />
+						<h:message for="yearsToAdd" styleClass="error" />
 
+					</div>
 				</div>
 
 				<!-- Coverage Options -->
@@ -284,12 +323,14 @@ form {
 					<!-- Coverage Option 1 -->
 					<div class="coverage-box">
 						<h3>Add Silver Option</h3>
-						<label>Premium Amount:</label>
+						<h:outputLabel escape="false"
+							value="<span style='color:red'>*</span>Premium Amount: " />
 						<h:inputText id="PremiumAmount"
 							value="#{insurancePlanController.coverageOption1.premiumAmount}" />
 						<h:message for="PremiumAmount" styleClass="error" />
 
-						<label>Coverage Amount:</label>
+						<h:outputLabel escape="false"
+							value="<span style='color:red'>*</span>Coverage Amount: :" />
 						<h:inputText id="CoverageAmount"
 							value="#{insurancePlanController.coverageOption1.coverageAmount}" />
 						<h:message for="CoverageAmount" styleClass="error" />
@@ -324,18 +365,21 @@ form {
 					</div>
 				</div>
 
-				<!-- Submit Button -->
-				<div class="center-button-container">
-					<h:commandButton value="SUBMIT"
-						action="#{insurancePlanController.addInsurancePlanWithCoveragePlan}"
-						styleClass="action-btn" />
-				</div>
 
 			</div>
+		<!-- Submit Button -->
+
+		<div class="button-row">
+
+			<h:commandButton value="Cencel" action="InsuranceAdminDashBoard.jsp"
+				styleClass="action-btn right-btn" />
+			<h:commandButton value="Add"
+				action="#{insurancePlanController.addInsurancePlanWithCoveragePlan}"
+				styleClass="action-btn" />
+		</div>
 		</h:form>
-
-
 	</div>
+	<h:messages globalOnly="true" style="color:red" />
 </body>
 
 	</html>

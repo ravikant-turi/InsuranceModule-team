@@ -1,5 +1,6 @@
 package com.infinite.jsf.insurance.controller;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class InsurancePlanController {
 	private InsuranceCoverageOptionDao insuranceCoverageOptionDao;
 	private InsurancePlanDao plandao = new InsurancePlanDaoImpl();
 	private List<InsuranceCoverageOption> planwithCovrageDetailsList;
+	private int yearsToAdd;
 
 //	=============methods==============
 
@@ -53,7 +55,6 @@ public class InsurancePlanController {
 	public String addInsurancePlanWithCoveragePlan() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		insurancePlan.setInsuranceCompany(insuranceCompany);
-
 		System.out.println("=============================");
 		System.out.println(insuranceCompany);
 		System.out.println(insurancePlan);
@@ -79,6 +80,12 @@ public class InsurancePlanController {
 					insuranceCoverageOptionDao.addInsuranceCoverageOption(option);
 				}
 			}
+
+			coverageOption1 = null;
+			coverageOption2 = null;
+			coverageOption3 = null;
+			insuranceCompany = null;
+			insurancePlan = null;
 			return "showplan?faces-redirect=true";
 		}
 
@@ -100,8 +107,9 @@ public class InsurancePlanController {
 		System.out.println(insurancePlan);
 		System.out.println(insuranceCompany);
 
-		return "CompletePlanDetailsTest?faces-redirect=true";
+		return "InsurancePlanCoverageDetails?faces-redirect=true";
 	}
+
 //	CompletePlanUpdateTest.jsp
 	public String showPlanDetailsToUpdate(String planId) {
 		List<InsuranceCoverageOption> list = insuranceCoverageOptionDao.searchInsuranceCoverageOptionByPlanId(planId);
@@ -117,11 +125,11 @@ public class InsurancePlanController {
 		System.out.println(insuranceCompany);
 		return "CompletePlanUpdateTest?faces-redirect=true";
 	}
+
 //update and back to menu
 	public String updatePlanDetailsWithCoveragePlan() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		insurancePlan.setInsuranceCompany(insuranceCompany);
-
 		System.out.println("=============================");
 		System.out.println(insuranceCompany);
 		System.out.println(insurancePlan);
@@ -147,7 +155,7 @@ public class InsurancePlanController {
 					insuranceCoverageOptionDao.updateInsuranceCoverageOption(option);
 				}
 			}
-			return "showplan?faces-redirect=true";
+			return "InsuranceUpdateInsurancePlanCoverage?faces-redirect=true";
 		}
 
 		return null;
@@ -222,6 +230,37 @@ public class InsurancePlanController {
 	public String showPlanWithCoveragDetailsByplanId(String plaId) {
 		planwithCovrageDetailsList = insuranceCoverageOptionDao.searchInsuranceCoverageOptionByPlanId(plaId);
 		return "showAllPlanByIdTest??faces-redirect=true";
+	}
+	// search coverageplanByCategory
+
+	public String showPlanCoverageByPlanDetailsByPlanType(String planType) {
+
+		planwithCovrageDetailsList = insuranceCoverageOptionDao.getInsuranceCoverageOptionsByPlanType(planType);
+
+		for (int i = 0; i < planwithCovrageDetailsList.size(); i++) {
+			coverageOption1 = planwithCovrageDetailsList.get(i);
+			insurancePlan = coverageOption1.insurancePlan;
+			insuranceCompany = insurancePlan.getInsuranceCompany();
+			if (coverageOption1 != null)
+				coverageOption2 = planwithCovrageDetailsList.get(i);
+			if (coverageOption2 != null)
+				coverageOption3 = planwithCovrageDetailsList.get(i);
+		}
+
+		return "InsurancePlanCoverageDetails.jsp?faces-redirect=true";
+
+	}
+
+//expire date dynamically adding via active date and years
+
+	public static Date calculateExpiryDate(Date activeDate, int yearsToAdd) {
+		if (activeDate == null) {
+			return null;
+		}
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(activeDate);
+		calendar.add(Calendar.YEAR, yearsToAdd);
+		return calendar.getTime();
 	}
 
 	// validation of plan
@@ -361,6 +400,11 @@ public class InsurancePlanController {
 				isValid = false;
 			}
 		}
+		if (yearsToAdd == 0) {
+			context.addMessage("companyForm:yearsToAdd",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "you must chose a duration.", null));
+			isValid = false;
+		}
 
 		return isValid;
 	}
@@ -471,6 +515,14 @@ public class InsurancePlanController {
 
 	public void setPlanwithCovrageDetailsList(List<InsuranceCoverageOption> planwithCovrageDetailsList) {
 		this.planwithCovrageDetailsList = planwithCovrageDetailsList;
+	}
+
+	public int getYearsToAdd() {
+		return yearsToAdd;
+	}
+
+	public void setYearsToAdd(int yearsToAdd) {
+		this.yearsToAdd = yearsToAdd;
 	}
 
 }

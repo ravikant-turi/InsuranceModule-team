@@ -16,8 +16,8 @@ public class InsurancePlan {
     private String availableCoverAmounts;
     private String waitingPeriod;
 
-    private Date createdOn = java.sql.Date.valueOf("2025-06-01");
-    private Date expireDate = java.sql.Date.valueOf("2099-12-31");
+    private Date createdOn =new Date();
+    private Date expireDate ;
     private Date activeOn;
     private String periodicDiseases; // YES or NO
 

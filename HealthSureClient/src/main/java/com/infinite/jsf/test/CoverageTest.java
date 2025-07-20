@@ -22,18 +22,26 @@ public class CoverageTest {
 
 //		dao.searchInsuranceCoverageOptionByPlanId("PLA006").forEach(System.out::println);
 
-		List<InsuranceCoverageOption> list = dao.searchInsuranceCoverageOptionByPlanId("PLA001");
+//		List<InsuranceCoverageOption> list = dao.searchInsuranceCoverageOptionByPlanId("PLA001");
 //		list.forEach(System.out::println);
-		System.out.println("=================\n" + list.get(0).getCoverageId());
-		System.out.println("=================\n" + list.get(1).getCoverageId());
-		System.out.println("=================\n" + list.get(2).getCoverageId());
-		for (InsuranceCoverageOption opt : list) {
-			System.out.println(opt.getInsurancePlan().getPlanId());
-			System.out.println(opt.getInsurancePlan().getInsuranceCompany().getCompanyId());
+//		System.out.println("=================\n" + list.get(0).getCoverageId());
+//		System.out.println("=================\n" + list.get(1).getCoverageId());
+//		System.out.println("=================\n" + list.get(2).getCoverageId());
+//		for (InsuranceCoverageOption opt : list) {
+//			System.out.println(opt.getInsurancePlan().getPlanId());
+//			System.out.println(opt.getInsurancePlan().getInsuranceCompany().getCompanyId());
+//
+//			System.out.println(opt.getCoverageId());
+//		}
 
-			System.out.println(opt.getCoverageId());
+		List<InsuranceCoverageOption> list = dao.getInsuranceCoverageOptionsByPlanType("SELF");
+		for (InsuranceCoverageOption options : list) {
+			System.out.println("===========");
+			System.out.println(options.getInsurancePlan());
+			System.out.println(options.getInsurancePlan().getInsuranceCompany());
+			System.out.println(options);
+			System.out.println("===========");
 		}
-
 	}
 
 }

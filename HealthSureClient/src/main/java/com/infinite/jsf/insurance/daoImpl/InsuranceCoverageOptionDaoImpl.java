@@ -3,7 +3,6 @@ package com.infinite.jsf.insurance.daoImpl;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -100,6 +99,7 @@ public class InsuranceCoverageOptionDaoImpl implements InsuranceCoverageOptionDa
 		return null;
 
 	}
+	@SuppressWarnings("unchecked")
 
 	@Override
 	public List<InsuranceCoverageOption> searchInsuranceCoverageOptionByPlanType(String planType) {
@@ -129,19 +129,37 @@ public class InsuranceCoverageOptionDaoImpl implements InsuranceCoverageOptionDa
 		session.close();
 		return foundCoverageOption;
 	}
+	@SuppressWarnings("unchecked")
 
 	@Override
 	public List<InsuranceCoverageOption> searchInsuranceCoverageOptionByPlanId(String planId) {
 		List<InsuranceCoverageOption> covrageOptionsList = null;
 		session = factory.openSession();
 		Transaction trans = session.beginTransaction();
-		
+
 		String sql = "SELECT c.* FROM insurance_coverage_option c JOIN insurance_plan p ON p.plan_id = c.plan_id WHERE c.plan_id = :plan_id";
 		covrageOptionsList = session.createSQLQuery(sql).addEntity(InsuranceCoverageOption.class)
-				.setParameter("plan_id", planId) 
-				.list();
-
+				.setParameter("plan_id", planId).list();
 
 		return covrageOptionsList;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<InsuranceCoverageOption> getInsuranceCoverageOptionsByPlanType(String planTypeStr) {
+		Session session = factory.openSession();
+		Transaction trans = session.beginTransaction();
+
+		String hql = "FROM InsuranceCoverageOption c " + "JOIN FETCH c.insurancePlan p "
+				+ "WHERE p.planTypeString = :planType";
+
+		List<InsuranceCoverageOption> options = session.createQuery(hql)
+				.setParameter("planType", planTypeStr.toUpperCase()).list(); // Use list() instead of uniqueResult()
+
+		trans.commit();
+		session.close();
+
+		return options;
+	}
+
 }
