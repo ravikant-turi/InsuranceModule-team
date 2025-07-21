@@ -2,6 +2,7 @@ package com.infinite.jsf.insurance.daoImpl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,6 +17,8 @@ public class InsuranceCompanyDaoImpl implements InsuranceCompanyDao{
 	static SessionFactory factory;
 	
 	static Session session;
+	
+	public static final Logger logger=Logger.getLogger(InsuranceCompanyDaoImpl.class);
 	
 	static {
 		factory=SessionHelper.getSessionFactory();
