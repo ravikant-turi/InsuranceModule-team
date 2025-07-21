@@ -371,7 +371,7 @@ form {
 
 		<div class="button-row">
 
-			<h:commandButton value="Cencel" action="InsuranceAdminDashBoard.jsp"
+			<h:commandButton value="Cancel" action="InsuranceAdminDashBoard.jsp"
 				styleClass="action-btn right-btn" />
 			<h:commandButton value="Add"
 				action="#{insurancePlanController.addInsurancePlanWithCoveragePlan}"

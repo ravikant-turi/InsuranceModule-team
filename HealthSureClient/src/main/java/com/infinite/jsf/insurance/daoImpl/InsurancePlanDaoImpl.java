@@ -41,6 +41,7 @@ public class InsurancePlanDaoImpl implements InsurancePlanDao {
 	 * @param plan the InsurancePlan to be added
 	 * @return success message or status
 	 */
+	
 	@Override
 	public String addInsurancePlan(InsurancePlan plan) {
 		// TODO: Implement logic to save InsurancePlan to database
